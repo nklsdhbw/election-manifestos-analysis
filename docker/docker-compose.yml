@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  python:
+    build:
+      context: ../python
+      dockerfile: Dockerfile
+    image: python
+    container_name: python
+    networks:
+      - my_network
+
+networks:
+  my_network:
