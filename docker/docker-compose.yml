@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  ocr:
+    build:
+      context: ../ocr
+      dockerfile: Dockerfile
+    image: ocr
+    container_name: ocr
+    command: ["/bin/bash"]
