@@ -1,10 +1,14 @@
 version: "3"
 
 services:
-  ocr:
+  python:
     build:
-      context: ../ocr
+      context: ../python
       dockerfile: Dockerfile
-    image: ocr
-    container_name: ocr
-    command: ["/bin/bash"]
+    image: python
+    container_name: python
+    networks:
+      - my_network
+
+networks:
+  my_network:
