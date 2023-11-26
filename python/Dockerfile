@@ -14,8 +14,11 @@ COPY deu.traineddata /usr/share/tesseract-ocr/4.00/tessdata/
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Change working directory to data_preprocessing
+WORKDIR ./data_preprocessing
+
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
-# Run script.py when the container launches
-CMD ["python", "script.py"]
+
+CMD ["python", "extract_tex_and_export.py"]
