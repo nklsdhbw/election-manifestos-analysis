@@ -3,7 +3,8 @@ import pytesseract
 import cv2
 import numpy as np
 import os
-
+import time
+import concurrent.futures
 
 ### Functions
 def deskew(image):
@@ -29,14 +30,13 @@ def extract_text_from_image(image):
     text = pytesseract.image_to_string(image)
     return text
 
-current_directory = os.getcwd()
-pdf_directory = os.path.join(current_directory, 'inputPDFs')
-output_path = os.path.join(current_directory, 'inputPDFs')
 
-
-
-file_names = [f for f in os.listdir(pdf_directory)]
-for file in file_names:
+# Simple Benchmark with 2 PDFs, future benchmarks will follow with larger pdfs
+# ThreadPoolExecutor: 14 seconds
+# Multiprocessing: 17 seconds
+# Joblib: 18 seconds
+# Normal: 21 seconds
+def process_file(file):
     extracted_texts = []
     pages = convert_from_path(f"{pdf_directory}/{file}")
 
@@ -56,3 +56,19 @@ for file in file_names:
             # remove all line breaks
             text = text.replace('\n', ' ')
             f.write(text)
+
+
+current_directory = os.getcwd()
+pdf_directory = os.path.join(current_directory, 'inputPDFs')
+output_path = os.path.join(current_directory, 'output')
+start_time = time.time()
+
+# Get file names
+file_names = [f for f in os.listdir(pdf_directory)]
+
+# ThreadPoolExecutor to parallelize the process
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    executor.map(process_file, file_names)
+
+end_time = time.time()
+print(f"Total time taken: {end_time - start_time} seconds")
