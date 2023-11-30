@@ -9,6 +9,15 @@ services:
     container_name: python
     networks:
       - my_network
+  reactapp:
+    build:
+      context: ../frontend
+    restart: always
+    container_name: reactApp
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
 
 networks:
   my_network:
