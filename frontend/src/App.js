@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import Hero from './components/Hero';
+import Features from './components/Features';
 
 function App() {
   return (
     <div className="Ap">
-      <h1 className="text-3xl font-bold text-cyan-300 text-center pt-20">
-      Frontend Test!
-      </h1>
+      <Hero />
+      <Features />
     </div>
   );
 }
