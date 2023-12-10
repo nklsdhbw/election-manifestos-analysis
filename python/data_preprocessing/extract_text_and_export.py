@@ -4,7 +4,11 @@ import cv2
 import numpy as np
 import os
 import time
+from datetime import datetime
 import concurrent.futures
+import re
+import logging
+logging.basicConfig(level=logging.INFO)
 
 ### Functions
 def deskew(image):
@@ -31,17 +35,37 @@ def extract_text_from_image(image):
     return text
 
 
+def removeSpecialCharacters(text):
+    # Remove line breaks
+    text = text.replace('\n', ' ')
+    
+    # Remove double spaces
+    text = re.sub(' +', ' ', text)
+    
+    # Remove punctuation and special characters (excluding digits)
+    text = re.sub(r'[^\w\s]', '', text)
+
+    return text
+
+
+
+
 # Simple Benchmark with 2 PDFs, future benchmarks will follow with larger pdfs
 # ThreadPoolExecutor: 14 seconds
 # Multiprocessing: 17 seconds
 # Joblib: 18 seconds
 # Normal: 21 seconds
 def process_file(file):
+    startTime = datetime.now()
+    logging.info(f"[Start processing file: {file} at {startTime}]")
+    
     extracted_texts = []
-    pages = convert_from_path(f"{pdf_directory}/{file}")
 
+    pages = convert_from_path(f"{pdf_directory}/{file}")
+    
     # Extract party from file name
     output_file_name = file.split('.')[0]
+
     
     # Draw pdf pages as images and extract text
     for page in pages:
@@ -53,22 +77,27 @@ def process_file(file):
     with open(f'{output_path}/{output_file_name}.txt', 'w') as f:
         for text in extracted_texts:
 
-            # remove all line breaks
-            text = text.replace('\n', ' ')
+            # remove all special characters
+            text = removeSpecialCharacters(text)
             f.write(text)
+    endTime = datetime.now()
+    logging.info(f"[Finished processing file: {file} at {time.time()}\n Time taken: {endTime - startTime}]")
 
 
 current_directory = os.getcwd()
 pdf_directory = os.path.join(current_directory, 'inputPDFs')
 output_path = os.path.join(current_directory, 'output')
-start_time = time.time()
+
+
 
 # Get file names
 file_names = [f for f in os.listdir(pdf_directory)]
 
 # ThreadPoolExecutor to parallelize the process
 with concurrent.futures.ThreadPoolExecutor() as executor:
+    logging.info(f"[Start processing files at {datetime.now()}]")
+    start_time = time.time()
     executor.map(process_file, file_names)
 
 end_time = time.time()
-print(f"Total time taken: {end_time - start_time} seconds")
+logging.info(f"[Finished processing files at {datetime.now()}] \n Total time taken: {end_time - start_time} seconds")
