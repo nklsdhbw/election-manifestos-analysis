@@ -7,6 +7,8 @@ from IPython.display import HTML, display
 import chardet
 import nltk
 import ssl
+
+# using SSL to download nltk (code from https://stackoverflow.com/questions/41348621/ssl-error-downloading-nltk-data)
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -18,7 +20,7 @@ from nltk.corpus import stopwords
 
 
 # definiton of the directory where the extracted text files are stored
-extracted_text_directory = './output'
+extracted_text_directory = './summary_output'
 
 # list to store the extracted text files
 extracted_text_files = []
@@ -81,14 +83,14 @@ panel = pyLDAvis.prepare(topic_term_dists=lda.components_, doc_topic_dists=doc_t
 # visualizing the topics with pyLDAvis
 pyLDAvis_display = pyLDAvis.display(panel)
 
-# Berechnen der notwendigen Werte für pyLDAvis
+# compute necessary elements for the visualization
 doc_topic_dist = lda.transform(X)
 topic_term_dists = lda.components_
 doc_lengths = np.sum(X, axis=1).A1
 vocab = vectorizer.get_feature_names_out()
 term_frequency = np.asarray(X.sum(axis=0)).ravel()
 
-#visualisation = pyLDAvis.prepare(lda, X, vectorizer, vocab, term_frequency, mds='tsne')
+# prepare the data for the visualization
 prepared_data = pyLDAvis.prepare(
     topic_term_dists=lda.components_, 
     doc_topic_dists=doc_topic_dist, 
@@ -96,4 +98,5 @@ prepared_data = pyLDAvis.prepare(
     vocab=vocab, 
     term_frequency=term_frequency
 )
+# save the visualization as html file to show the results
 pyLDAvis.save_html(prepared_data, 'LDA_Visualization.html')
