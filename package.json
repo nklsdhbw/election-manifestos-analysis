@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "react-router-dom": "^6.20.1"
-  },
-  "dependencies": {
-    "react-icons": "^4.12.0"
-  }
-}
