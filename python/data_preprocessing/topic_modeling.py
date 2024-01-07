@@ -7,6 +7,8 @@ from IPython.display import HTML, display
 import chardet
 import nltk
 import ssl
+import pandas as pd
+from nltk.corpus import stopwords
 
 # using SSL to download nltk (code from https://stackoverflow.com/questions/41348621/ssl-error-downloading-nltk-data)
 try:
@@ -16,7 +18,7 @@ except AttributeError:
 else:
     ssl._create_default_https_context = _create_unverified_https_context
 nltk.download('stopwords')
-from nltk.corpus import stopwords
+
 
 
 # definiton of the directory where the extracted text files are stored
@@ -49,17 +51,7 @@ for text_file in os.listdir(extracted_text_directory):
             text = file.read()
             docs.append(text)
 
-# define german stopwords
-german_stopwords = stopwords.words('german')
-
-# vectorisation of the text 
-vectorizer = CountVectorizer(stop_words=german_stopwords)
-X = vectorizer.fit_transform(docs)
-
-# fit the LDA model using 4 topics (can be changed)
-lda = LatentDirichletAllocation(n_components=4, random_state=0)
-lda.fit(X)
-
+#! Functions
 # showing the top words of each topic
 def print_top_words(model, feature_names, n_top_words):
     for topic_idx, topic in enumerate(model.components_):
@@ -68,35 +60,58 @@ def print_top_words(model, feature_names, n_top_words):
                              for i in topic.argsort()[-10:]])
         print(top_topic)
 
-print_top_words(lda, vectorizer.get_feature_names_out(), 5)
 
-# apply LDA model to the vectorized text
-doc_topic_dist = lda.transform(X)
+# define german stopwords
+german_stopwords = stopwords.words('german')
 
-# extracting the vocabulary and the term frequency
-vocab = vectorizer.get_feature_names_out()
-term_frequency = np.asarray(X.sum(axis=0)).ravel()
+# vectorisation of the text 
+vectorizer = CountVectorizer(stop_words=german_stopwords)
+parties = os.listdir('./inputPDFs')
+# get file name without extension
+parties = [os.path.splitext(party)[0] for party in parties]
+print(parties)
+for doc, party in zip(docs, parties):
+    print(doc)
+    doc = [doc]
+    X = vectorizer.fit_transform(doc)
 
-panel = pyLDAvis.prepare(topic_term_dists=lda.components_, doc_topic_dists=doc_topic_dist,
-                         doc_lengths=np.sum(X, axis=1).A1, vocab=vocab, term_frequency=term_frequency)
+    # fit the LDA model using 4 topics (can be changed)
+    lda = LatentDirichletAllocation(n_components=4, random_state=0)
+    lda.fit(X)
+    print_top_words(lda, vectorizer.get_feature_names_out(), 5)
 
-# visualizing the topics with pyLDAvis
-pyLDAvis_display = pyLDAvis.display(panel)
+    # apply LDA model to the vectorized text
+    doc_topic_dist = lda.transform(X)
 
-# compute necessary elements for the visualization
-doc_topic_dist = lda.transform(X)
-topic_term_dists = lda.components_
-doc_lengths = np.sum(X, axis=1).A1
-vocab = vectorizer.get_feature_names_out()
-term_frequency = np.asarray(X.sum(axis=0)).ravel()
+    # extracting the vocabulary and the term frequency
+    vocab = vectorizer.get_feature_names_out()
+    term_frequency = np.asarray(X.sum(axis=0)).ravel()
 
-# prepare the data for the visualization
-prepared_data = pyLDAvis.prepare(
-    topic_term_dists=lda.components_, 
-    doc_topic_dists=doc_topic_dist, 
-    doc_lengths=np.sum(X, axis=1).A1, 
-    vocab=vocab, 
-    term_frequency=term_frequency
-)
-# save the visualization as html file to show the results
-pyLDAvis.save_html(prepared_data, 'LDA_Visualization.html')
+    panel = pyLDAvis.prepare(topic_term_dists=lda.components_, doc_topic_dists=doc_topic_dist,
+                            doc_lengths=np.sum(X, axis=1).A1, vocab=vocab, term_frequency=term_frequency)
+
+    # visualizing the topics with pyLDAvis
+    pyLDAvis_display = pyLDAvis.display(panel)
+
+    # compute necessary elements for the visualization
+    doc_topic_dist = lda.transform(X)
+    topic_term_dists = lda.components_
+    doc_lengths = np.sum(X, axis=1).A1
+    vocab = vectorizer.get_feature_names_out()
+    term_frequency = np.asarray(X.sum(axis=0)).ravel()
+
+    # prepare the data for the visualization
+    prepared_data = pyLDAvis.prepare(
+        topic_term_dists=lda.components_, 
+        doc_topic_dists=doc_topic_dist, 
+        doc_lengths=np.sum(X, axis=1).A1, 
+        vocab=vocab, 
+        term_frequency=term_frequency
+    )
+    # save the visualization as html file to show the results
+    pyLDAvis.save_html(prepared_data, f'LDA_Visualization_{party}.html')
+    # Array to csv
+    
+    df = pd.DataFrame(vocab, columns=['Vokabel'])
+    df['Häufigkeit'] = term_frequency
+    df.to_csv(f'./topic modelling/{party}vocab.csv', index=False, header=False, sep=',')
