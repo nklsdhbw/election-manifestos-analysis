@@ -1,6 +1,6 @@
 from PyPDF2 import PdfReader
 import re
-pdf = "DIE_GRUENEN.pdf"
+pdf = "DIE_LINKE.pdf"
 reader = PdfReader(pdf)
 pages = reader.pages
 raw_text = ""
@@ -8,7 +8,7 @@ print(len(reader.pages))
 lineNumber = 0
 removeIndexes = []
 clearedTexts = []
-for page in pages[0:2]:
+for page in pages[0:20]:
     text = page.extract_text()
     text = text.replace('\n', ' ')
     text = text.replace(' - ', '')
@@ -69,7 +69,20 @@ for page in pages[0:2]:
         raw_text += cleared_text
         #print(text)
 
+    if pdf == "SPD.pdf":
+        text = text.replace("SPD-Parteivorstand 2021", '')
+        text = re.sub(r'Kapitel \d+ Seite >\d+', '', text)
+        raw_text += text
     
+    if pdf == "DIE_LINKE.pdf":
+        # Find all words containing characters and numbers -> numbers are page numbers
+        matches = re.findall(r'\w*\d\w*', text)
+        for match in matches:
+            if not match.isdigit():
+                # Remove the page number from the string like "7Einführung"
+                cleaned = re.sub(r'\d', ' ', match)
+                text = text.replace(match, cleaned)
+        raw_text += text
     
 
 
