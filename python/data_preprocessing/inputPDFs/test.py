@@ -1,6 +1,6 @@
 from PyPDF2 import PdfReader
 import re
-pdf = "DIE_LINKE.pdf"
+pdf = "FDP.pdf"
 reader = PdfReader(pdf)
 pages = reader.pages
 raw_text = ""
@@ -8,7 +8,7 @@ print(len(reader.pages))
 lineNumber = 0
 removeIndexes = []
 clearedTexts = []
-for page in pages[0:20]:
+for page in pages[0:10]:
     text = page.extract_text()
     text = text.replace('\n', ' ')
     text = text.replace(' - ', '')
@@ -84,6 +84,12 @@ for page in pages[0:20]:
                 text = text.replace(match, cleaned)
         raw_text += text
     
+    if pdf == "FDP.pdf":
+        pattern = r'Das Programm der Freien Demokraten zur Bundestagswahl 2021 (\d+)'
+        page = re.findall(pattern, text)
+        if page:
+            print(page)
+            text = text.replace(f"Das Programm der Freien Demokraten zur Bundestagswahl 2021 {page[0]}", '')
+        raw_text += text
 
 
-print(raw_text)
