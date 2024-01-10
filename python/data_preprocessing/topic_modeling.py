@@ -1,6 +1,7 @@
 import os
 from sklearn.decomposition import LatentDirichletAllocation
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import PCA
 import numpy as np
 import pyLDAvis
 from IPython.display import HTML, display
@@ -80,6 +81,15 @@ for doc, party in zip(docs, parties):
     lda.fit(X)
     print_top_words(lda, vectorizer.get_feature_names_out(), 5)
 
+    pca = PCA(n_components=2)  # amount of components can be changed
+    topic_term_dists = lda.components_
+    pca_results = pca.fit_transform(topic_term_dists)
+
+    # save the results of the PCA in a dataframe
+    pca_df = pd.DataFrame(pca_results, columns=['PCA1', 'PCA2'])
+    pca_df['Topic'] = range(1, len(pca_results) + 1)
+    pca_df.to_csv(f'./topic modelling/PCA_results_{party}.csv', index=False)
+
     # apply LDA model to the vectorized text
     doc_topic_dist = lda.transform(X)
 
@@ -108,10 +118,11 @@ for doc, party in zip(docs, parties):
         vocab=vocab, 
         term_frequency=term_frequency
     )
+    
     # save the visualization as html file to show the results
     pyLDAvis.save_html(prepared_data, f'LDA_Visualization_{party}.html')
-    # Array to csv
-    
+
+    # array to csv
     df = pd.DataFrame(vocab, columns=['Vokabel'])
     df['Häufigkeit'] = term_frequency
     df.to_csv(f'./topic modelling/{party}vocab.csv', index=False, header=False, sep=',')

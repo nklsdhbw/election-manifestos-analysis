@@ -1,74 +1,64 @@
+import spacy
 import os
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import accuracy_score, classification_report
+from spacy.util import minibatch
+from spacy.training.example import Example
+import random
 import matplotlib.pyplot as plt
 
-# Die vordefinierten Labels/Themen
-labels = ['Wirtschaft', 'Technologie', 'Gesundheit', 'Umwelt', 'Politik']  
+# load spaCy model
+nlp = spacy.load('de_core_news_sm')
 
-# Erstellen eines DataFrames zur Simulation gelabelter Daten
-# Dieser Schritt würde manuelles Labeln erfordern, um ein Anfangsset für das Training zu erstellen
-# Hier simulieren wir diesen Schritt mit einem Dummy-DataFrame
-# In der Praxis müssten Sie Texte mit ihren tatsächlichen Labels bereitstellen
+# add text classification to the pipeline
+textcat = nlp.add_pipe('textcat')
 
-# Beispiel-Daten
-data = [
-    ('Die Inflation hat in diesem Jahr einen neuen Höhepunkt erreicht, was zu steigenden Preisen führt', 'Wirtschaft'),
-    ('Die neuesten Trends in der KI-Technologie revolutionieren die Art und Weise, wie wir mit Maschinen interagieren', 'Technologie'),
-    ('Immer mehr Menschen wählen pflanzliche Ernährung für eine bessere Gesundheit und Umwelt', 'Gesundheit'),
-    ('Die politischen Spannungen in der Region haben zu diplomatischen Verhandlungen geführt', 'Politik'),
-    ('Die Auswirkungen des Klimawandels werden immer sichtbarer, insbesondere in Küstenregionen', 'Umwelt'),
-    ('Innovative medizinische Behandlungen versprechen neue Hoffnung für chronische Krankheiten', 'Gesundheit'),
-    ('Die Finanzmärkte zeigen nach dem jüngsten Börsencrash Anzeichen einer Erholung', 'Wirtschaft'),
-    ('Die neuesten Smartphones bieten eine beeindruckende Palette von Funktionen und Verbesserungen', 'Technologie'),
-    ('Wahlrechtsreformen werden diskutiert, um faire und transparente Wahlen zu gewährleisten', 'Politik'),
-    ('Umweltaktivisten rufen zu dringenden Maßnahmen gegen die globale Erwärmung auf', 'Umwelt')
-]
+# definiton of the labels
+labels = ["Politik", "Wirtschaft", "Umwelt"]
+for label in labels:
+    textcat.add_label(label)
 
+# empty list to store the training data
+train_data = []
 
-df = pd.DataFrame(data, columns=['text', 'label'])
+# read the text files and add them to the list
+file_path = './politischer_text.txt'
+with open(file_path, 'r', encoding='utf-8') as file:
+    politischer_text = file.read()
+    # TODO: multi label is needed here
+train_data.append((politischer_text, {"cats": {"Politik": True, "Wirtschaft": True, "Umwelt": True}})) 
 
-# Textdaten vorbereiten
-tfidf_vectorizer = TfidfVectorizer(max_features=5000)
-X = tfidf_vectorizer.fit_transform(df['text'])
+# train model
+optimizer = nlp.begin_training()
+for i in range(10):
+    random.shuffle(train_data)
+    losses = {}
+    for batch in minibatch(train_data, size=8):
+        for text, annotations in batch:
+            doc = nlp.make_doc(text)
+            example = Example.from_dict(doc, annotations)
+            nlp.update([example], drop=0.5, losses=losses)
+    print(f"Losses at iteration {i}: {losses}")
 
-# Label kodieren
-label_encoder = LabelEncoder()
-y = label_encoder.fit_transform(df['label'])
-
-# Trainings- und Testset erstellen
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Klassifikationsmodell erstellen und trainieren
-classifier = MultinomialNB()
-classifier.fit(X_train, y_train)
-
-# Modell evaluieren
-y_pred = classifier.predict(X_test)
-
-# Hier entfernen wir target_names, damit classification_report automatisch die richtigen Namen verwendet
-print(classification_report(y_test, y_pred, target_names=label_encoder.classes_))
-
-# Texte aus dem "summary_output"-Ordner klassifizieren
+# classify the extracted texts
 extracted_text_directory = './summary_output'
-text_counts = {label: 0 for label in labels}
+classified_texts = {label: 0 for label in labels}
 
 for filename in os.listdir(extracted_text_directory):
     if filename.endswith('.txt'):
         file_path = os.path.join(extracted_text_directory, filename)
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
-            text_vectorized = tfidf_vectorizer.transform([text])
-            predicted_label = label_encoder.inverse_transform(classifier.predict(text_vectorized))[0]
-            text_counts[predicted_label] += 1
+            doc = nlp(text)
+            max_label = max(doc.cats, key=lambda label: doc.cats[label])
+            if doc.cats[max_label] > 0.5:
+                classified_texts[max_label] += 1
 
-# Balkendiagramm der Textverteilung nach Label
-plt.bar(text_counts.keys(), text_counts.values())
+# visualize the classification
+# for now just a simple chart with matlpotlib 
+plt.bar(classified_texts.keys(), classified_texts.values())
 plt.xlabel('Labels')
 plt.ylabel('Anzahl der Texte')
-plt.title('Verteilung der Texte nach Label')
+plt.title('Klassifizierung der Texte nach Label')
 plt.show()
+
+# optinal: save the model
+# nlp.to_disk("/path/to/saved_model")
