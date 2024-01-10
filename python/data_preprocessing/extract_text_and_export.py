@@ -27,7 +27,7 @@ def deskew(image):
 
 
 def extract_text_from_image(image):
-    text = pytesseract.image_to_string(image)
+    text = pytesseract.image_to_string(image, lang='deu')
     return text
 
 
@@ -65,7 +65,7 @@ start_time = time.time()
 
 # Get file names
 file_names = [f for f in os.listdir(pdf_directory)]
-
+file_names = ["DIE_GRUENEN.pdf"]
 # ThreadPoolExecutor to parallelize the process
 with concurrent.futures.ThreadPoolExecutor() as executor:
     executor.map(process_file, file_names)
