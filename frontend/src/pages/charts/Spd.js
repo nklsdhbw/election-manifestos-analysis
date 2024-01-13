@@ -5,8 +5,6 @@ import apple from "../charts/data/apple.csv";
 import email from "../charts/data/email.csv";
 import * as dfd from "danfojs";
 
-import { ReactComponent as spd_svg } from "../../img/SPD_top_worte.svg";
-
 
 const Spd = () => {
   const [emailDataFrame, setEmailDataFrame] = useState(null);
@@ -216,7 +214,7 @@ const Spd = () => {
 
   return (
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-     <spd_svg />
+
       <canvas id="topWordsChart" width="400" height="200"></canvas>
       <canvas id="emailChart" width="400" height="200"></canvas>
       <canvas id="appleChart" width="400" height="200"></canvas>
