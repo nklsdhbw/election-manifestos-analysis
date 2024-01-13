@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
+import top_words from "../charts/data/SPD_top_worte.csv";
+import apple from "../charts/data/apple.csv";
+import email from "../charts/data/email.csv";
 
 const Fdp = () => {
   const chartRef = useRef(null);

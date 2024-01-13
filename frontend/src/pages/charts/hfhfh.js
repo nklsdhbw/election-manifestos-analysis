@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
-import apple from "./apple.csv";
-import email from "./email.csv";
+import top_words from "../charts/data/SPD_top_worte.csv";
+import apple from "../charts/data/apple.csv";
+import email from "../charts/data/email.csv";
 import * as dfd from "danfojs";
 
 const Hfhfh = () => {
