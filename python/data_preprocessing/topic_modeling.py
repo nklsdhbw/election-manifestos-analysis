@@ -120,9 +120,10 @@ for doc, party in zip(docs, parties):
     )
     
     # save the visualization as html file to show the results
-    pyLDAvis.save_html(prepared_data, f'LDA_Visualization_{party}.html')
+    pyLDAvis.save_html(prepared_data, f'./LDA_Vis/LDA_Visualization_{party}.html')
+
 
     # array to csv
     df = pd.DataFrame(vocab, columns=['Vokabel'])
     df['Häufigkeit'] = term_frequency
-    df.to_csv(f'./topic modelling/{party}vocab.csv', index=False, header=False, sep=',')
+    df.to_csv(f'./topic modelling/{party}vocab.csv', index=False, header=0, sep=',')
