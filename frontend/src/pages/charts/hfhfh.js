@@ -4,7 +4,7 @@ import apple from "./apple.csv";
 import email from "./email.csv";
 import * as dfd from "danfojs";
 
-const Spd = () => {
+const Hfhfh = () => {
   const [emailDataFrame, setEmailDataFrame] = useState(null);
   const [appleDataFrame, setAppleDataFrame] = useState(null);
   const emailChartRef = useRef(null);
@@ -149,4 +149,4 @@ const Spd = () => {
   );
 };
 
-export default Spd;
+export default Hfhfh;

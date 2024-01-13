@@ -1,6 +1,6 @@
 import Nav from "../components/Nav";
-import email from "./email.csv";
-import apple from "./apple.csv";
+// import email from "./email.csv";
+// import apple from "./apple.csv";
 import * as dfd from "danfojs";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
@@ -10,6 +10,7 @@ import Chart from 'chart.js/auto';
 import ChartAfd from "./charts/Afd.js";
 import ChartSpd from "./charts/Spd.js";
 import ChartFdp from "./charts/Fdp.js";
+import Hfhfh from "./charts/hfhfh.js";
 
 
 function classNames(...classes) {
@@ -17,12 +18,13 @@ function classNames(...classes) {
 }
 
 export default function Dashboard() {
-  const CSVs = [email, apple];
-  const CSVsStrings = ["email", "apple"];
+  // const CSVs = [email, apple];
+  // const CSVsStrings = ["email", "apple"];
   // read csv with danfo.js
   const [showChartAfd, setShowChartAfd] = useState(false);
   const [showChartSpd, setShowChartSpd] = useState(false);
   const [showChartFdp, setShowChartFdp] = useState(false);
+  const [showChartTest, setShowChartTest] = useState(false);
 
   // async function fetchCSVData(file) {
   //   // fetch csv file
@@ -95,6 +97,7 @@ export default function Dashboard() {
                       setShowChartAfd(true); // Show chart 0
                       setShowChartSpd(false); // Hide other charts
                       setShowChartFdp(false); // Hide other charts
+                      setShowChartTest(false);
                       // setShowChart1(false); // Hide other charts
                       // Set other chart visibility as needed
                     }}
@@ -115,6 +118,7 @@ export default function Dashboard() {
                       setShowChartAfd(false); 
                       setShowChartSpd(true);
                       setShowChartFdp(false);
+                      setShowChartTest(false);
                     }}
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
@@ -133,6 +137,7 @@ export default function Dashboard() {
                       setShowChartAfd(false); 
                       setShowChartSpd(false);
                       setShowChartFdp(true);
+                      setShowChartTest(false);
                     }}
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
@@ -143,7 +148,27 @@ export default function Dashboard() {
                   </a>
                 )}
               </Menu.Item>
-             
+              <Menu.Item>
+                {({ active }) => (
+                  <a
+                    href="#"
+                    onClick={() => {
+                      setShowChartAfd(false); // Show chart 0
+                      setShowChartSpd(false); // Hide other charts
+                      setShowChartFdp(false); // Hide other charts
+                      setShowChartTest(true);
+                      // setShowChart1(false); // Hide other charts
+                      // Set other chart visibility as needed
+                    }}
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
+                    )}
+                  >
+                    Test
+                  </a>
+                )}
+              </Menu.Item>
             </div>
           </Menu.Items>
         </Transition>
@@ -156,6 +181,7 @@ export default function Dashboard() {
         {showChartAfd && <ChartAfd />}
         {showChartSpd && <ChartSpd />}
         {showChartFdp && <ChartFdp />}
+        {showChartTest && <Hfhfh />}
         {/* {showChart1 && <Point1Chart />} */}
 
         {/* <main>
