@@ -1,71 +1,69 @@
-# TODO: Komplett überarbeiten, da die ausgegebene Grafik noch komplett leer ist :(
+import spacy
+from spacy.util import minibatch
+from spacy.training.example import Example
+import random
+import os
+import csv
+import json
 
-# import spacy
-# from spacy.util import minibatch
-# from spacy.training.example import Example
-# import random
-# import matplotlib.pyplot as plt
-# import os
+# load the german spaCy model
+nlp = spacy.load('de_core_news_sm')
 
-# # load spaCy model
-# nlp = spacy.load('de_core_news_sm')
+# add text classification to the pipeline for multilabels
+if 'textcat_multilabel' not in nlp.pipe_names:
+    textcat = nlp.add_pipe('textcat_multilabel')
+else:
+    textcat = nlp.get_pipe('textcat_multilabel')
 
-# # add text classification to the pipeline
-# if 'textcat_multilabel' not in nlp.pipe_names:
-#     textcat = nlp.add_pipe('textcat_multilabel')
-# else:
-#     textcat = nlp.get_pipe('textcat_multilabel')
+# path to the JSON file with the training data
+file_path = './formatted_training_data.json'
 
-# # definition of the labels
-# labels = ["Politik", "Wirtschaft", "Umwelt"]
-# for label in labels:
-#     textcat.add_label(label)
+# read the training data from the JSON file
+with open(file_path, 'r', encoding='utf-8') as file:
+    train_data = json.load(file)
 
-# # read the text files and add them to the list
-# train_data = []
-# file_path = './politischer_text.txt'
-# with open(file_path, 'r', encoding='utf-8') as file:
-#     lines = file.readlines()
+# add the labels to the text classifier, labels are read from the training data
+labels = set()
+for _, annotations in train_data:
+    labels.update(annotations['cats'].keys())
+for label in labels:
+    textcat.add_label(label)
 
-#     for i in range(0, len(lines), 2):
-#         text = lines[i].strip()
-#         text_labels = lines[i + 1].strip().split(', ')
-#         cats = {label: label in text_labels for label in labels}
-#         train_data.append((text, {"cats": cats}))
+# train the spaCy model with the training data
+optimizer = nlp.begin_training()
+for i in range(10):
+    random.shuffle(train_data)
+    losses = {}
+    for batch in minibatch(train_data, size=2):
+        for text, annotations in batch:
+            doc = nlp.make_doc(text)
+            example = Example.from_dict(doc, annotations)
+            nlp.update([example], drop=0.2, losses=losses)
+    print(f"Losses at iteration {i}: {losses}")
 
-# # train model
-# optimizer = nlp.begin_training()
-# for i in range(10):
-#     random.shuffle(train_data)
-#     losses = {}
-#     for batch in minibatch(train_data, size=2):
-#         for text, annotations in batch:
-#             doc = nlp.make_doc(text)
-#             example = Example.from_dict(doc, annotations)
-#             nlp.update([example], drop=0.5, losses=losses)
-#     print(f"Losses at iteration {i}: {losses}")
+# directory with the files to be classified
+extracted_text_directory = './output'
+results = []
 
-# # classify the extracted texts
-# extracted_text_directory = './summary_output'
-# classified_texts = {label: [] for label in labels}
+# classify the files in the directory
+for filename in os.listdir(extracted_text_directory):
+    if filename.endswith('.txt'):
+        file_path = os.path.join(extracted_text_directory, filename)
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
+            doc = nlp(text)
+            scores = {label: doc.cats[label] for label in labels}
+            filename_without_extension, _ = os.path.splitext(filename)
+            scores['filename'] = filename_without_extension
+            results.append(scores)
 
-# for filename in os.listdir(extracted_text_directory):
-#     if filename.endswith('.txt'):
-#         file_path = os.path.join(extracted_text_directory, filename)
-#         with open(file_path, 'r', encoding='utf-8') as file:
-#             text = file.read()
-#             doc = nlp(text)
-#             for label, score in doc.cats.items():
-#                 if score > 0.5:
-#                     classified_texts[label].append(filename)
+# save the results in a csv file in a separate folder 'label_results'
+output_folder = './label_results'
+os.makedirs(output_folder, exist_ok=True)
+csv_file_path = os.path.join(output_folder, 'classification_results.csv')
 
-# # visualize the classification
-# counts = {label: len(files) for label, files in classified_texts.items()}
-# plt.bar(counts.keys(), counts.values())
-# plt.xlabel('Labels')
-# plt.ylabel('Anzahl der Texte')
-# plt.title('Klassifizierung der Texte nach Label')
-# plt.show()
-
-# # optional: save the model
-# # nlp.to_disk("/path/to/saved_model")
+with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=['filename'] + list(labels))
+    writer.writeheader()
+    for result in results:
+        writer.writerow(result)
