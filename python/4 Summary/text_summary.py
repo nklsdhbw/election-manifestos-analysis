@@ -47,7 +47,7 @@ def process_text_file(file_path, output_path, language='german', summary_ratio=0
                 output_file.write(str(sentence) + "\n")
 
 # paths
-input_path = './output'
+input_path = '../1 data_preprocessing/output'
 output_path = './summary_output'
 
 # create output directory if it does not exist
