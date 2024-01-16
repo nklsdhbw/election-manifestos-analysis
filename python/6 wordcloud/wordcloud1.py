@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import os
 
 def create_wordclouds():
-    source_folder = './top_words'
-    target_folder = './wordclouds'
+    source_folder = '../5 top words/top_words'
+    target_folder = './'
 
     if not os.path.exists(target_folder):
         os.makedirs(target_folder)
