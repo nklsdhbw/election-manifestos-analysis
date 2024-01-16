@@ -23,7 +23,7 @@ nltk.download('stopwords')
 
 
 # definiton of the directory where the extracted text files are stored
-extracted_text_directory = './summary_output'
+extracted_text_directory = '../4 Summary/summary_output'
 
 # list to store the extracted text files
 extracted_text_files = []
@@ -67,7 +67,7 @@ german_stopwords = stopwords.words('german')
 
 # vectorisation of the text 
 vectorizer = CountVectorizer(stop_words=german_stopwords)
-parties = os.listdir('./inputPDFs')
+parties = os.listdir('../1 data_preprocessing/inputPDFs')
 # get file name without extension
 parties = [os.path.splitext(party)[0] for party in parties]
 print(parties)
@@ -88,7 +88,7 @@ for doc, party in zip(docs, parties):
     # save the results of the PCA in a dataframe
     pca_df = pd.DataFrame(pca_results, columns=['PCA1', 'PCA2'])
     pca_df['Topic'] = range(1, len(pca_results) + 1)
-    pca_df.to_csv(f'./topic modelling/PCA_results_{party}.csv', index=False)
+    pca_df.to_csv(f'./PCA_results_{party}.csv', index=False)
 
     # apply LDA model to the vectorized text
     doc_topic_dist = lda.transform(X)
@@ -126,4 +126,4 @@ for doc, party in zip(docs, parties):
     # array to csv
     df = pd.DataFrame(vocab, columns=['Vokabel'])
     df['Häufigkeit'] = term_frequency
-    df.to_csv(f'./topic modelling/{party}vocab.csv', index=False, header=0, sep=',')
+    df.to_csv(f'./topics/{party}vocab.csv', index=False, header=0, sep=',')
