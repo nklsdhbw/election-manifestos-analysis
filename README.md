@@ -81,17 +81,21 @@ Then create a new virtual environment called `nlp` by running the following comm
 Afterwards activate your freshly created virtual environment
 If you're using Windows then run
  
-	 nlp\Scripts\activate
+	 source nlp\Scripts\activate
 	 
 If you're using MacOs or Linux run 
 
-	nlp/bin/activate
+	source nlp/bin/activate
 
 Now install all the required packages from `requirements.txt` by running
 
 	pip install -r requirements.txt
   
-Now restart your IDE and you should be able to select `nlp` as your environment
+  Then download the `de_core_news_sm` dataset from spacy via
+	
+	python -m spacy download de_core_news_sm
+	
+ Lastly restart your IDE and you should be able to select `nlp` as your environment
 
 ## 💻 Tech-stack
 
