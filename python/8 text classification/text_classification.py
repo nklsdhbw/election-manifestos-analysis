@@ -42,7 +42,7 @@ for i in range(10):
     print(f"Losses at iteration {i}: {losses}")
 
 # directory with the files to be classified
-extracted_text_directory = './output'
+extracted_text_directory = '../1 data_preprocessing/output'
 results = []
 
 # classify the files in the directory
@@ -58,7 +58,7 @@ for filename in os.listdir(extracted_text_directory):
             results.append(scores)
 
 # save the results in a csv file in a separate folder 'label_results'
-output_folder = './label_results'
+output_folder = './labels'
 os.makedirs(output_folder, exist_ok=True)
 csv_file_path = os.path.join(output_folder, 'classification_results.csv')
 
