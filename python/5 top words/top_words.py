@@ -39,7 +39,7 @@ def top_words(filepath, top_n=30):
     return top_words
 
 def folder(folder_path):
-    target_folder = os.path.join(os.path.dirname(folder_path), 'top_words')
+    target_folder = "./top_words"
 
     if not os.path.exists(target_folder):
         os.makedirs(target_folder)
@@ -59,5 +59,5 @@ def folder(folder_path):
                     csv_schreiber.writerow([wort, anzahl])
 
 
-ordner_pfad = './output'
+ordner_pfad = '../1 data_preprocessing/output'
 folder(ordner_pfad)
