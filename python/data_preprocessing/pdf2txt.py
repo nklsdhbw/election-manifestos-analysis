@@ -14,7 +14,8 @@ for pdf in pdfs:
     raw_text = ""
     lineNumber = 0
     clearedTexts = []
-    for page in pages[0:10]:
+    meltPart1 = ""
+    for page in pages:
         text = page.extract_text()
         text = text.replace('\n', ' ')
         text = text.replace(' - ', '')
@@ -52,26 +53,86 @@ for pdf in pdfs:
 
         if pdf == "CDU-CSU.pdf":
             text = re.sub(r'Seite \d+ von \d+', '', text)
-            digit_list = [int(match) for match in re.findall(r'\d+', text)]
+            #digit_list = [int(match) for match in re.findall(r'\d+', text)]
             text = text.split(" ")
             cleared_text = []
+            indexes = []
             for word in text:
+                if meltPart1 != "":
+                    word = meltPart1 + word
+                    word = word.replace("-", "")
+                    meltPart1 = ""
+                index = 0
                 digits = [int(match) for match in re.findall(r'\d+', word)]
+                # Extract all digits from the word
+                # Check if digit is equal to the line number
+                # if yes the digit equals the line number and has to be removed
                 for digit in digits:
+                    # Sonderlocke CO21477
+                    if digit == 21477:
+                        word = "CO2"
+                        lineNumber += 1
+
+                    if digit == lineNumber:
+                        lineNumber += 1
+                        strDigit = f"{digit}"
+
+                        # e.g. konventio1881 
+                        if strDigit != word:
+                            words = [element for element in text if strDigit in element]
+                            words = words[0]
+                            index = text.index(words)
+                          
+                            indexes.append(index)
+                            word = word.replace(strDigit, '')
+
                     if digit == lineNumber+1:
                         lineNumber += 1
                         strDigit = f"{digit}"
+
+                        # e.g. konventio1881 
+                        if strDigit != word:
+                            words = [element for element in text if strDigit in element]
+                            words = words[0]
+                            index = text.index(words)
+                            
+                            indexes.append(index)
+                            word = word.replace(strDigit, '')
                         word = word.replace(strDigit, '')
                 cleared_text.append(word)
                 # remove all "" from list
-                cleared_text = list(filter(None, cleared_text))
+                
                 # join list to string
+
+            indexDecrease = 0
+            for index in indexes:
+                index -= indexDecrease
+
+                # len = 50
+                # melt e.g index12 and 13
+                # -> index 14 is now index 13
+                if index != len(cleared_text)-1:
+                    cleared_text[index] = cleared_text[index] + cleared_text[index+1]
+                    del cleared_text[index+1]
+                    indexDecrease += 1
+                # Special case: end of page is reached and word continues on next page
+                else:
+                    meltPart1 = cleared_text[index]
+                    del cleared_text[index]
+            cleared_text = list(filter(None, cleared_text))
             cleared_text = " ".join(cleared_text)
+            cleared_text = cleared_text.replace("•", "")
+            #text = re.sub(r'\s+', ' ', text)
             raw_text += cleared_text
+
 
         if pdf == "SPD.pdf":
             text = text.replace("SPD-Parteivorstand 2021", '')
+            text = text.replace("Das Zukunftsprogramm der SPD", '')
             text = re.sub(r'Kapitel \d+ Seite >\d+', '', text)
+            text = re.sub(r'Kapitel \d+', '', text)
+            # Replace multiple whitespaces with one whitespace
+            text = re.sub(r'\s+', ' ', text)
             raw_text += text
         
         if pdf == "DIE_LINKE.pdf":
@@ -82,7 +143,9 @@ for pdf in pdfs:
                     # Remove the page number from the string like "7Einführung"
                     cleaned = re.sub(r'\d', ' ', match)
                     text = text.replace(match, cleaned)
+            text = text.replace(" n ", "")
             raw_text += text
+
         
         if pdf == "FDP.pdf":
             pattern = r'Das Programm der Freien Demokraten zur Bundestagswahl 2021 (\d+)'
