@@ -5,6 +5,7 @@ import random
 import os
 import csv
 import json
+import shutil
 
 # load the german spaCy model
 nlp = spacy.load('de_core_news_sm')
@@ -67,3 +68,7 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
     writer.writeheader()
     for result in results:
         writer.writerow(result)
+
+
+# Copy folder into react frontend src folder so that react can access the data
+shutil.copytree('./labels', '../../frontend/src/pages/charts/data/labels', dirs_exist_ok=True)

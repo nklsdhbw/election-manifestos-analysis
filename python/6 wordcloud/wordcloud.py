@@ -1,10 +1,11 @@
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import os
+import shutil
 
 def create_wordclouds():
     source_folder = '../5 top words/top_words'
-    target_folder = './'
+    target_folder = './wordclouds'
 
     if not os.path.exists(target_folder):
         os.makedirs(target_folder)
@@ -41,3 +42,6 @@ def create_wordclouds():
             plt.close()
 
 create_wordclouds()
+
+# Copy folder into react frontend src folder so that react can access the data
+shutil.copytree('./wordclouds', '../../frontend/src/pages/charts/data/wordclouds', dirs_exist_ok=True)

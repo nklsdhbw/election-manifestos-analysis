@@ -10,6 +10,7 @@ import nltk
 import ssl
 import pandas as pd
 from nltk.corpus import stopwords
+import shutil
 
 # using SSL to download nltk (code from https://stackoverflow.com/questions/41348621/ssl-error-downloading-nltk-data)
 try:
@@ -88,7 +89,7 @@ for doc, party in zip(docs, parties):
     # save the results of the PCA in a dataframe
     pca_df = pd.DataFrame(pca_results, columns=['PCA1', 'PCA2'])
     pca_df['Topic'] = range(1, len(pca_results) + 1)
-    pca_df.to_csv(f'./PCA_results_{party}.csv', index=False)
+    pca_df.to_csv(f'./PCA/PCA_results_{party}.csv', index=False)
 
     # apply LDA model to the vectorized text
     doc_topic_dist = lda.transform(X)
@@ -127,3 +128,8 @@ for doc, party in zip(docs, parties):
     df = pd.DataFrame(vocab, columns=['Vokabel'])
     df['Häufigkeit'] = term_frequency
     df.to_csv(f'./topics/{party}vocab.csv', index=False, header=0, sep=',')
+
+# Copy folder into react frontend src folder so that react can access the data
+shutil.copytree('./topics', '../../frontend/src/pages/charts/data/topics', dirs_exist_ok=True)
+shutil.copytree('./LDA_Vis', '../../frontend/src/pages/charts/data/LDA_Vis', dirs_exist_ok=True)
+shutil.copytree('./PCA', '../../frontend/src/pages/charts/data/PCA', dirs_exist_ok=True)
