@@ -4,11 +4,13 @@ import * as dfd from "danfojs";
 import top_words from "../charts/data/SPD_top_worte.csv";
 import apple from "../charts/data/apple.csv";
 import email from "../charts/data/email.csv";
+import similarities from "../charts/data/similarities/AFD - similarities.csv"
 
 const Hfhfh = () => {
   const [emailDataFrame, setEmailDataFrame] = useState(null);
   const [appleDataFrame, setAppleDataFrame] = useState(null);
   const [topWordsDataFrame, setTopWordsDataFrame] = useState(null);
+  const [similarityDataFrame, setSimilarityDataFrame] = useState(null);
   const emailChartRef = useRef(null);
   const appleChartRef = useRef(null);
   const topWordsChartRef = useRef(null);
@@ -18,7 +20,7 @@ const Hfhfh = () => {
     async function fetchCSVData(file) {
       try {
         const csv = await fetch(file).then((row) => row.text());
-
+        console.log(csv)
         // Replace any occurrences of '\r' with an empty string to remove them.
         const cleanedCSV = csv.replace(/\r/g, "");
 
@@ -63,6 +65,16 @@ const Hfhfh = () => {
       .then((dataFrame) => {
         if (dataFrame) {
           setAppleDataFrame(dataFrame);
+        }
+      })
+      .catch((error) => {
+        console.error("Error processing apple CSV data", error);
+      });
+
+      fetchCSVData(similarities)
+      .then((dataFrame) => {
+        if (dataFrame) {
+          setSimilarityDataFrame(dataFrame);
         }
       })
       .catch((error) => {
@@ -214,17 +226,14 @@ const Hfhfh = () => {
   }, [topWordsDataFrame]);
 
   useEffect(() => {
+    if (similarityDataFrame) {
+    
     const polarData = {
-      labels: [
-        'Red',
-        'Green',
-        'Yellow',
-        'Grey',
-        'Blue'
-      ],
+      labels: similarityDataFrame["party"].values,
       datasets: [{
-        label: 'My First Dataset',
-        data: [11, 16, 7, 3, 14],
+
+        label: "",
+        data: similarityDataFrame["similarity"].values,//[10, 20, 30, 40, 50],
         backgroundColor: [
           'rgb(255, 99, 132)',
           'rgb(75, 192, 192)',
@@ -233,7 +242,7 @@ const Hfhfh = () => {
           'rgb(54, 162, 235)'
         ]
       }]
-    };
+    }
 
     const polarConfig = {
       type: 'polarArea',
@@ -241,14 +250,14 @@ const Hfhfh = () => {
       options: {
         responsive: true,
       }
-    };
+    }
 
     if (polarChartRef.current) {
       polarChartRef.current.destroy();
     }
 
     polarChartRef.current = new Chart("polarChart", polarConfig);
-  }, []);
+  }}, [similarityDataFrame]);
 
   return (
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
