@@ -1,7 +1,7 @@
-Partei,Positiv,Negativ
-CDU CSU,6.91,2.69
-SPD,5.99,1.66
-B90 / Die Grünen,3.72,1.66
-FDP,6.84,4.09
-AFD,9.68,3.67
-Die Linke,11.01,3.93
+Partei,Positiv,Negativ,Sentences
+CDU CSU,3.19,0.53,188
+SPD,4.23,1.88,213
+B90 / Die Grünen,2.41,2.41,166
+FDP,3.7,1.54,324
+AFD,4.94,1.23,81
+Die Linke,2.75,1.53,327
