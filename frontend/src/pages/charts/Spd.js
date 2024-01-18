@@ -1,20 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
-import apple from "./apple.csv";
-import email from "./email.csv";
+import top_words from "../charts/data/SPD_top_worte.csv";
+import apple from "../charts/data/apple.csv";
+import email from "../charts/data/email.csv";
 import * as dfd from "danfojs";
+
 
 const Spd = () => {
   const [emailDataFrame, setEmailDataFrame] = useState(null);
   const [appleDataFrame, setAppleDataFrame] = useState(null);
+  const [topWordsDataFrame, setTopWordsDataFrame] = useState(null);
   const emailChartRef = useRef(null);
   const appleChartRef = useRef(null);
+  const topWordsChartRef = useRef(null);
 
   useEffect(() => {
     async function fetchCSVData(file) {
       try {
         const csv = await fetch(file).then((row) => row.text());
-        let csvToArray = csv.split("\n");
+        
+        // Replace any occurrences of '\r' with an empty string to remove them.
+        const cleanedCSV = csv.replace(/\r/g, '');
+    
+        let csvToArray = cleanedCSV.split("\n");
         let columns = csvToArray[0].split(",");
         let data = csvToArray.slice(1, csvToArray.length);
         let rows = [];
@@ -30,6 +38,17 @@ const Spd = () => {
         return null;
       }
     }
+    
+
+    fetchCSVData(top_words)
+      .then((dataFrame) => {
+        if (dataFrame) {
+          setTopWordsDataFrame(dataFrame);
+        }
+      })
+      .catch((error) => {
+        console.error("Error processing email CSV data", error);
+      });
 
     fetchCSVData(email)
       .then((dataFrame) => {
@@ -52,12 +71,16 @@ const Spd = () => {
       });
 
     return () => {
+      if (topWordsChartRef.current) {
+        topWordsChartRef.current.destroy();
+      }
       if (emailChartRef.current) {
         emailChartRef.current.destroy();
       }
       if (appleChartRef.current) {
         appleChartRef.current.destroy();
       }
+      
     };
   }, []);
 
@@ -109,7 +132,7 @@ const Spd = () => {
           {
             label: "Apple Dataset",
             data: appleDataFrame["Close"].values,
-            backgroundColor: "#007bff",
+            backgroundColor: "#E3000F",
             borderColor: "black",
             borderWidth: 1,
           },
@@ -141,8 +164,58 @@ const Spd = () => {
     }
   }, [appleDataFrame]);
 
+  useEffect(() => {
+    if (topWordsDataFrame) {
+      const topWordsData = {
+        labels: topWordsDataFrame["Wort"].values,
+        datasets: [
+          {
+            label: "Word Dataset",
+            data: topWordsDataFrame["Anzahl"].values,
+            backgroundColor: "#E3000F",
+            borderColor: "black",
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      const topWordsConfig = {
+        type: "bar",
+        data: topWordsData,
+        options: {
+          indexAxis: 'y',
+          // Elements options apply to all of the options unless overridden in a dataset
+          // In this case, we are setting the border of each horizontal bar to be 2px wide
+          elements: {
+            bar: {
+              borderWidth: 2,
+            }
+          },
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'right',
+            },
+            title: {
+              display: true,
+              text: 'Top Words Chart'
+            }
+          }
+        },
+      };
+
+      if (topWordsChartRef.current) {
+        topWordsChartRef.current.destroy();
+      }
+
+      topWordsChartRef.current = new Chart("topWordsChart", topWordsConfig);
+    }
+  }, [topWordsDataFrame]);
+
   return (
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+
+      <canvas id="topWordsChart" width="400" height="200"></canvas>
       <canvas id="emailChart" width="400" height="200"></canvas>
       <canvas id="appleChart" width="400" height="200"></canvas>
     </div>

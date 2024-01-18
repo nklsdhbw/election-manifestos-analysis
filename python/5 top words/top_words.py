@@ -5,6 +5,7 @@ from collections import Counter
 import nltk
 from nltk.corpus import stopwords
 import ssl
+import shutil
 
 # TODO: fix the issue to remove stopwords, since now nltk is not working
 
@@ -61,3 +62,6 @@ def folder(folder_path):
 
 ordner_pfad = '../1 data_preprocessing/output'
 folder(ordner_pfad)
+
+# Copy folder into react frontend src folder so that react can access the data
+shutil.copytree('./top_words', '../../frontend/src/pages/charts/data/top_words', dirs_exist_ok=True)
