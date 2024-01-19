@@ -92,9 +92,12 @@ for filename in os.listdir(extracted_text_directory):
                 for column, counter in zip(["Bildung", "Wirtschaft", "Gesundheit", "Umwelt"], [counterBildung, counterWirtschaft, counterGesundheit, counterUmwelt]):
                     text += column + "," + str(round(((counter/countSentences)*100),2)) + "\n"
                     allParties += filename.replace('.txt', '') + "," + column + "," + str(round(((counter/countSentences)*100),2)) + "\n"
+                # Remove last newline
+                text = text[:-1]
                 csvfile.write(text)
 csv_file_path = os.path.join(output_folder, 'classification_results.csv')
 with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
+    allParties = allParties[:-1]
     csvfile.write(allParties)
 
 # copy folder into react frontend src folder so that react can access the data
