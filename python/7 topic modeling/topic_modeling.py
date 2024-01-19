@@ -3,16 +3,14 @@ from sklearn.decomposition import LatentDirichletAllocation
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import PCA
 import numpy as np
-import pyLDAvis
-from IPython.display import HTML, display
-import chardet
-import nltk
-import ssl
 import pandas as pd
 from nltk.corpus import stopwords
 import shutil
+import chardet
+import nltk
+import ssl
 
-# using SSL to download nltk (code from https://stackoverflow.com/questions/41348621/ssl-error-downloading-nltk-data)
+# using SSL to download nltk
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -21,19 +19,8 @@ else:
     ssl._create_default_https_context = _create_unverified_https_context
 nltk.download('stopwords')
 
-
-
-# definiton of the directory where the extracted text files are stored
-extracted_text_directory = '../4 Summary/summary_output'
-
-# list to store the extracted text files
-extracted_text_files = []
-
-# iteration through the extracted text files
-for filename in os.listdir(extracted_text_directory):
-    if filename.endswith('.txt'):
-        extracted_text_files.append(filename)
-
+# definition of the directory where the extracted text files are stored
+extracted_text_directory = '../1 data_preprocessing/output'
 
 docs = []
 
@@ -53,83 +40,47 @@ for text_file in os.listdir(extracted_text_directory):
             text = file.read()
             docs.append(text)
 
-#! Functions
-# showing the top words of each topic
-def print_top_words(model, feature_names, n_top_words):
-    for topic_idx, topic in enumerate(model.components_):
-        top_topic = "Thema #%d: " % topic_idx
-        top_topic += " ".join([feature_names[i]
-                             for i in topic.argsort()[-10:]])
-        print(top_topic)
-
-
-# define german stopwords
+# define German stopwords
 german_stopwords = stopwords.words('german')
 
-# vectorisation of the text 
+# vectorisation of the text
 vectorizer = CountVectorizer(stop_words=german_stopwords)
-parties = os.listdir('../1 data_preprocessing/inputPDFs')
-# get file name without extension
-parties = [os.path.splitext(party)[0] for party in parties]
-print(parties)
-for doc, party in zip(docs, parties):
-    print(doc)
-    doc = [doc]
-    X = vectorizer.fit_transform(doc)
+X = vectorizer.fit_transform(docs)
 
-    # fit the LDA model using 4 topics (can be changed)
-    lda = LatentDirichletAllocation(n_components=4, random_state=0)
-    lda.fit(X)
-    print_top_words(lda, vectorizer.get_feature_names_out(), 5)
+# fit the LDA model using 6 topics (can be changed)
+lda = LatentDirichletAllocation(n_components=6, random_state=0)
+lda.fit(X)
 
-    pca = PCA(n_components=2)  # amount of components can be changed
-    topic_term_dists = lda.components_
-    pca_results = pca.fit_transform(topic_term_dists)
+# compuation of the average topic weights
+topic_weights = lda.transform(X)
+average_topic_weights = np.mean(topic_weights, axis=0)
 
-    # save the results of the PCA in a dataframe
-    pca_df = pd.DataFrame(pca_results, columns=['PCA1', 'PCA2'])
-    pca_df['Topic'] = range(1, len(pca_results) + 1)
-    pca_df.to_csv(f'./PCA/PCA_results_{party}.csv', index=False)
+# create df and save it as csv
+topic_df = pd.DataFrame({
+    'Thema': [f'Thema {i+1}' for i in range(len(average_topic_weights))],
+    'Durchschnittlicher_Anteil': average_topic_weights
+})
+topic_df.to_csv('durchschnittliche_themenanteile.csv', index=False)
 
-    # apply LDA model to the vectorized text
-    doc_topic_dist = lda.transform(X)
 
-    # extracting the vocabulary and the term frequency
-    vocab = vectorizer.get_feature_names_out()
-    term_frequency = np.asarray(X.sum(axis=0)).ravel()
+# aggregate words per topic for each document
+n_top_words = 10  # Number of top words per topic
 
-    panel = pyLDAvis.prepare(topic_term_dists=lda.components_, doc_topic_dists=doc_topic_dist,
-                            doc_lengths=np.sum(X, axis=1).A1, vocab=vocab, term_frequency=term_frequency)
-
-    # visualizing the topics with pyLDAvis
-    pyLDAvis_display = pyLDAvis.display(panel)
-
-    # compute necessary elements for the visualization
-    doc_topic_dist = lda.transform(X)
-    topic_term_dists = lda.components_
-    doc_lengths = np.sum(X, axis=1).A1
-    vocab = vectorizer.get_feature_names_out()
-    term_frequency = np.asarray(X.sum(axis=0)).ravel()
-
-    # prepare the data for the visualization
-    prepared_data = pyLDAvis.prepare(
-        topic_term_dists=lda.components_, 
-        doc_topic_dists=doc_topic_dist, 
-        doc_lengths=np.sum(X, axis=1).A1, 
-        vocab=vocab, 
-        term_frequency=term_frequency
-    )
+for i, party in enumerate(os.listdir('../1 data_preprocessing/inputPDFs')):
+    party = os.path.splitext(party)[0] # Get file name without extension
+    topic_word_distributions = lda.components_
     
-    # save the visualization as html file to show the results
-    pyLDAvis.save_html(prepared_data, f'./LDA_Vis/LDA_Visualization_{party}.html')
+    # create a DataFrame to store top words for all topics
+    all_topics_df = pd.DataFrame()
 
+    for topic_idx, topic_distribution in enumerate(topic_word_distributions):
+        top_word_indices = topic_distribution.argsort()[-n_top_words:][::-1]
+        top_words = [(vectorizer.get_feature_names_out()[i], topic_distribution[i]) for i in top_word_indices]
+        topic_df = pd.DataFrame(top_words, columns=[f'Topic_{topic_idx+1}_Word', f'Topic_{topic_idx+1}_Frequency'])
+        all_topics_df = pd.concat([all_topics_df, topic_df], axis=1)
 
-    # array to csv
-    df = pd.DataFrame(vocab, columns=['Vokabel'])
-    df['Häufigkeit'] = term_frequency
-    df.to_csv(f'./topics/{party}vocab.csv', index=False, header=0, sep=',')
+    all_topics_df.to_csv(f'./topics/{party}_all_topics.csv', index=False)
 
-# Copy folder into react frontend src folder so that react can access the data
+# copy folders into the React frontend src folder so that React can access the data
 shutil.copytree('./topics', '../../frontend/src/pages/charts/data/topics', dirs_exist_ok=True)
-shutil.copytree('./LDA_Vis', '../../frontend/src/pages/charts/data/LDA_Vis', dirs_exist_ok=True)
 shutil.copytree('./PCA', '../../frontend/src/pages/charts/data/PCA', dirs_exist_ok=True)
