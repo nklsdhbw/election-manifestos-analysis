@@ -51,34 +51,51 @@ all_results = []
 # classify the files in the directory
 output_folder = './labels'
 os.makedirs(output_folder, exist_ok=True)
-
+allParties = "Party,Label,Percentage\n"
 for filename in os.listdir(extracted_text_directory):
+    print("Start processing files")
+    counterUmwelt  = 0
+    counterBildung = 0
+    counterGesundheit = 0
+    counterWirtschaft = 0
     if filename.endswith('.txt'):
         file_path = os.path.join(extracted_text_directory, filename)
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
-            doc = nlp(text)
-            scores = {label: doc.cats[label] for label in labels}
+            texts = text.split(". ")
+            countSentences = len(texts)
+            for text in texts:
+                doc = nlp(text)
+                scores = {label: doc.cats[label] for label in labels}
+                max_label = max(scores, key=scores.get)
+                if max_label =="Umwelt":
+                    counterUmwelt +=1
+                if max_label == "Bildung":
+                    counterBildung +=1
+                if max_label == "Gesundheit":
+                    counterGesundheit +=1
+                if max_label == "Wirtschaft":
+                    counterWirtschaft +=1
+            #print("Bildung", counterBildung, "Wirtschaft", counterWirtschaft)
 
             # Add to all_results for classification_results.csv
-            scores_with_filename = scores.copy()
-            scores_with_filename['filename'] = filename.replace('.txt', '')
-            all_results.append(scores_with_filename)
+            #scores_with_filename = scores.copy()
+            #scores_with_filename['filename'] = filename.replace('.txt', '')
+            #all_results.append(scores_with_filename)
 
+            
             # Creating a csv file for each text file
             csv_file_path = os.path.join(output_folder, filename.replace('.txt', '.csv'))
+            
             with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
-                writer = csv.DictWriter(csvfile, fieldnames=labels)
-                writer.writeheader()
-                writer.writerow(scores)
-
-# save the overall classification results in a csv file
+                text = "Label,Percentage\n"
+                for column, counter in zip(["Bildung", "Wirtschaft", "Gesundheit", "Umwelt"], [counterBildung, counterWirtschaft, counterGesundheit, counterUmwelt]):
+                    text += column + "," + str(round(((counter/countSentences)*100),2)) + "\n"
+                    allParties += filename.replace('.txt', '') + "," + column + "," + str(round(((counter/countSentences)*100),2)) + "\n"
+                csvfile.write(text)
 csv_file_path = os.path.join(output_folder, 'classification_results.csv')
 with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=['filename'] + list(labels))
-    writer.writeheader()
-    for result in all_results:
-        writer.writerow(result)
+    csvfile.write(allParties)
 
 # copy folder into react frontend src folder so that react can access the data
 shutil.copytree('./labels', '../../frontend/src/pages/charts/data/labels', dirs_exist_ok=True)
