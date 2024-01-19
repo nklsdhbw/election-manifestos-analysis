@@ -7,6 +7,8 @@ import csv
 import json
 import shutil
 
+# TODO: fix the label 'Gesundheit' -> specify the training data for this label
+
 # load the german spaCy model
 nlp = spacy.load('de_core_news_sm')
 
@@ -17,7 +19,7 @@ else:
     textcat = nlp.get_pipe('textcat_multilabel')
 
 # path to the JSON file with the training data
-file_path = './formatted_training_data.json'
+file_path = './modified_training_data.json'
 
 # read the training data from the JSON file
 with open(file_path, 'r', encoding='utf-8') as file:
@@ -44,9 +46,12 @@ for i in range(10):
 
 # directory with the files to be classified
 extracted_text_directory = '../1 data_preprocessing/output'
-results = []
+all_results = []
 
 # classify the files in the directory
+output_folder = './labels'
+os.makedirs(output_folder, exist_ok=True)
+
 for filename in os.listdir(extracted_text_directory):
     if filename.endswith('.txt'):
         file_path = os.path.join(extracted_text_directory, filename)
@@ -54,21 +59,26 @@ for filename in os.listdir(extracted_text_directory):
             text = file.read()
             doc = nlp(text)
             scores = {label: doc.cats[label] for label in labels}
-            filename_without_extension, _ = os.path.splitext(filename)
-            scores['filename'] = filename_without_extension
-            results.append(scores)
 
-# save the results in a csv file in a separate folder 'label_results'
-output_folder = './labels'
-os.makedirs(output_folder, exist_ok=True)
+            # Add to all_results for classification_results.csv
+            scores_with_filename = scores.copy()
+            scores_with_filename['filename'] = filename.replace('.txt', '')
+            all_results.append(scores_with_filename)
+
+            # Creating a csv file for each text file
+            csv_file_path = os.path.join(output_folder, filename.replace('.txt', '.csv'))
+            with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=labels)
+                writer.writeheader()
+                writer.writerow(scores)
+
+# save the overall classification results in a csv file
 csv_file_path = os.path.join(output_folder, 'classification_results.csv')
-
 with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=['filename'] + list(labels))
     writer.writeheader()
-    for result in results:
+    for result in all_results:
         writer.writerow(result)
 
-
-# Copy folder into react frontend src folder so that react can access the data
+# copy folder into react frontend src folder so that react can access the data
 shutil.copytree('./labels', '../../frontend/src/pages/charts/data/labels', dirs_exist_ok=True)
