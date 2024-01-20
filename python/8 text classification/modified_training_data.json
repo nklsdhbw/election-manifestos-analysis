@@ -162,5 +162,115 @@
         "Gesundheit": false
       }
     }
+  ],
+  [
+    "Wir verpflichten uns zur Verbesserung des Gesundheitssystems durch den Ausbau der digitalen Infrastruktur, um eine effizientere Patientenversorgung und einen schnelleren Zugang zu medizinischen Dienstleistungen zu gewährleisten.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
+  ],
+  [
+    "Unser Ziel ist es, die Prävention und Früherkennung von Krankheiten zu stärken, um die allgemeine Gesundheit der Bevölkerung zu fördern und langfristige Gesundheitskosten zu senken.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
+  ],
+  [
+    "Unser Plan umfasst eine umfassende Strategie zur Reduzierung der CO2-Emissionen, um den Klimawandel effektiv zu bekämpfen und eine nachhaltige Zukunft zu sichern.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir setzen uns für den Schutz unserer natürlichen Ressourcen ein und fördern nachhaltige Energiequellen, um die Umwelt für zukünftige Generationen zu bewahren.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unser Programm zielt darauf ab, Arbeitsplätze zu schaffen und die Wettbewerbsfähigkeit unserer Industrie auf dem globalen Markt zu erhöhen.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir streben danach, die Wirtschaft zu stärken, indem wir kleine und mittlere Unternehmen fördern und innovative Technologien unterstützen.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unsere Priorität liegt darin, das Bildungssystem so zu reformieren, dass es auf die Bedürfnisse des 21. Jahrhunderts zugeschnitten ist und jedem die Möglichkeit bietet, sein volles Potenzial zu entfalten.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir verpflichten uns zur Verbesserung der Bildungsqualität, indem wir in moderne Lehrmethoden investieren und den Zugang zu Bildung für alle gewährleisten.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir setzen uns für eine umfassende Gesundheitsreform ein, die eine bezahlbare und hochwertige medizinische Versorgung für alle Bürger sicherstellt",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
+  ],
+  [
+    "Unser Fokus liegt auf der Stärkung des öffentlichen Gesundheitswesens, um die allgemeine Gesundheit zu verbessern und den Zugang zu präventiven Maßnahmen zu erleichtern",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
   ]
 ]
