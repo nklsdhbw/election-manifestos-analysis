@@ -272,5 +272,225 @@
         "Gesundheit": true
       }
     }
+  ],
+  [
+    "Wir planen die Einführung strengerer Umweltauflagen für Industrieunternehmen, um die Luft- und Wasserqualität in unseren Städten zu verbessern.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unsere Initiative zur Förderung des öffentlichen Nahverkehrs zielt darauf ab, den CO2-Ausstoß zu verringern und städtische Mobilität nachhaltiger zu gestalten.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unsere Strategie zur Wirtschaftsförderung beinhaltet gezielte Steuererleichterungen und Investitionen in Zukunftstechnologien.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir wollen ein Umfeld schaffen, das Start-ups und technologische Innovationen fördert, um langfristiges Wirtschaftswachstum zu sichern.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir setzen uns für den Ausbau von Ganztagsbetreuung und -schulen ein, um Familien zu unterstützen und die Bildungschancen für Kinder zu erhöhen.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Die Digitalisierung des Bildungswesens ist ein zentrales Anliegen, um Schülerinnen und Schüler auf die Herausforderungen der digitalen Welt vorzubereiten.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir planen die Erhöhung der Investitionen in die Gesundheitsforschung, insbesondere in den Bereichen Prävention und Behandlung chronischer Krankheiten.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
+  ],
+  [
+    "Unser Ziel ist es, die Wartezeiten für medizinische Behandlungen zu verkürzen und die Qualität der Patientenversorgung in Krankenhäusern und Arztpraxen zu verbessern.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
+  ],
+  [
+    "Wir fördern die Wiederaufforstung und den Schutz von Grünflächen, um die biologische Vielfalt zu erhalten und natürliche Lebensräume zu schützen.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unser Ziel ist es, die Abfallwirtschaft zu revolutionieren, indem wir Recycling fördern und die Reduzierung von Plastikmüll priorisieren.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir setzen uns für eine faire Handelspolitik ein, die heimische Produzenten schützt und gleichzeitig globale Märkte zugänglich macht.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unser Programm beinhaltet die Förderung von beruflicher Weiterbildung und Umschulung, um Arbeitnehmern den Übergang in die digitalisierte Wirtschaft zu erleichtern",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir streben danach, das Verhältnis von Schülern zu Lehrern zu verbessern, um eine individuellere und effektivere Bildung zu ermöglichen.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unsere Initiative zielt darauf ab, kritische Denkfähigkeiten und kreative Problemlösung in den Lehrplänen stärker zu verankern.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir planen, den Zugang zu psychischer Gesundheitsversorgung zu erweitern, um das Bewusstsein zu schärfen und die Stigmatisierung abzubauen.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
+  ],
+  [
+    "Unser Ziel ist es, die Effizienz der Gesundheitssysteme durch den Einsatz von Telemedizin und digitalen Gesundheitsanwendungen zu steigern.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": true
+      }
+    }
+  ],
+  [
+    "Die Förderung erneuerbarer Energien steht im Zentrum unserer Umweltpolitik.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unser Plan sieht vor, die Wettbewerbsfähigkeit kleiner Unternehmen durch Steuererleichterungen zu stärken.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir setzen uns für die Integration digitaler Technologien in allen Bildungseinrichtungen ein.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Die Verbesserung der öffentlichen Gesundheitsversorgung ist ein wesentlicher Bestandteil unseres Gesundheitsprogramms.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
   ]
 ]
