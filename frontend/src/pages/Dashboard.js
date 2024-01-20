@@ -11,6 +11,9 @@ import ChartAfd from "./charts/Afd.js";
 import ChartSpd from "./charts/Spd.js";
 import ChartFdp from "./charts/Fdp.js";
 import Hfhfh from "./charts/hfhfh.js";
+import ChartCduCsu from "./charts/CduCsu.js";
+import ChartGrune from "./charts/Gruene.js";
+import ChartLinke from "./charts/Linke.js";
 
 
 function classNames(...classes) {
@@ -25,39 +28,11 @@ export default function Dashboard() {
   const [showChartSpd, setShowChartSpd] = useState(false);
   const [showChartFdp, setShowChartFdp] = useState(false);
   const [showChartTest, setShowChartTest] = useState(false);
+  const [showChartCduCsu, setShowChartCduCsu] = useState(false);
+  const [showChartGrune, setShowChartGrune] = useState(false);
+  const [showChartLinke, setShowChartLinke] = useState(false);
 
-  // async function fetchCSVData(file) {
-  //   // fetch csv file
-  //   const csv = await fetch(file).then((row) => {
-  //     return row.text();
-  //   });
-
-  //   // convert csv to array
-  //   let csvToArray = csv.split("\n");
-
-  //   // extract columns
-  //   let columns = csvToArray[0].split(",");
-
-  //   // extract data
-  //   let data = csvToArray.slice(1, csvToArray.length);
-  //   let rows = [];
-  //   data.forEach((row) => {
-  //     row = row.split(",");
-  //     rows.push(row);
-  //   });
-
-  //   // create dataframe
-  //   // dataframe is similar to pandas dataframe, e.g. df.head(), df.describe() or df[columnName] to access a column
-  //   let df = new dfd.DataFrame(rows, { columns: columns });
-  //   df.print();
-    
-
-
-
-
-  // }
-
-  // display barchart with chart js react
+  
   return (
     <div>
       <div className="relative isolate px-6 pt-14 lg:px-8 min-h-full">
@@ -97,9 +72,10 @@ export default function Dashboard() {
                       setShowChartAfd(true); // Show chart 0
                       setShowChartSpd(false); // Hide other charts
                       setShowChartFdp(false); // Hide other charts
-                      setShowChartTest(false);
-                      // setShowChart1(false); // Hide other charts
-                      // Set other chart visibility as needed
+                      setShowChartCduCsu(false);
+                      setShowChartGrune(false);
+                      setShowChartLinke(false);
+                    
                     }}
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
@@ -118,7 +94,9 @@ export default function Dashboard() {
                       setShowChartAfd(false); 
                       setShowChartSpd(true);
                       setShowChartFdp(false);
-                      setShowChartTest(false);
+                      setShowChartCduCsu(false);
+                      setShowChartGrune(false);
+                      setShowChartLinke(false);
                     }}
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
@@ -137,7 +115,9 @@ export default function Dashboard() {
                       setShowChartAfd(false); 
                       setShowChartSpd(false);
                       setShowChartFdp(true);
-                      setShowChartTest(false);
+                      setShowChartCduCsu(false);
+                      setShowChartGrune(false);
+                      setShowChartLinke(false);
                     }}
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
@@ -156,7 +136,9 @@ export default function Dashboard() {
                       setShowChartAfd(false); // Show chart 0
                       setShowChartSpd(false); // Hide other charts
                       setShowChartFdp(false); // Hide other charts
-                      setShowChartTest(true);
+                      setShowChartCduCsu(true);
+                      setShowChartGrune(false);
+                      setShowChartLinke(false);
                       // setShowChart1(false); // Hide other charts
                       // Set other chart visibility as needed
                     }}
@@ -165,7 +147,51 @@ export default function Dashboard() {
                       "block px-4 py-2 text-sm"
                     )}
                   >
-                    Test
+                    CDU/CSU
+                  </a>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <a
+                    href="#"
+                    onClick={() => {
+                      setShowChartAfd(false); // Show chart 0
+                      setShowChartSpd(false); // Hide other charts
+                      setShowChartFdp(false); // Hide other charts
+                      setShowChartCduCsu(false);
+                      setShowChartGrune(true);
+                      setShowChartLinke(false);
+                      // setShowChart1(false); // Hide other charts
+                      // Set other chart visibility as needed
+                    }}
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
+                    )}
+                  >
+                    B90 Die Grünen
+                  </a>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <a
+                    href="#"
+                    onClick={() => {
+                      setShowChartAfd(false); 
+                      setShowChartSpd(false); 
+                      setShowChartFdp(false); 
+                      setShowChartCduCsu(false);
+                      setShowChartGrune(false);
+                      setShowChartLinke(true);
+                    }}
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
+                    )}
+                  >
+                    Die Linke
                   </a>
                 )}
               </Menu.Item>
@@ -181,7 +207,9 @@ export default function Dashboard() {
         {showChartAfd && <ChartAfd />}
         {showChartSpd && <ChartSpd />}
         {showChartFdp && <ChartFdp />}
-        {showChartTest && <Hfhfh />}
+        {showChartCduCsu && <ChartCduCsu />}
+        {showChartGrune && <ChartGrune />}
+        {showChartLinke && <ChartLinke />}
         {/* {showChart1 && <Point1Chart />} */}
 
         {/* <main>
