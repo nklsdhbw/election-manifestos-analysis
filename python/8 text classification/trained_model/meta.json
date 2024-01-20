@@ -805,9 +805,9 @@
     ],
     "textcat_multilabel":[
       "Bildung",
+      "Umwelt",
       "Gesundheit",
-      "Wirtschaft",
-      "Umwelt"
+      "Wirtschaft"
     ]
   },
   "pipeline":[

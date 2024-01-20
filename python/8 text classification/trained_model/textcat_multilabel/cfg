@@ -1,9 +1,9 @@
 {
   "labels":[
     "Bildung",
+    "Umwelt",
     "Gesundheit",
-    "Wirtschaft",
-    "Umwelt"
+    "Wirtschaft"
   ],
   "threshold":0.5
 }
