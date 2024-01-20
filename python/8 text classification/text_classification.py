@@ -7,37 +7,36 @@ import csv
 import json
 import shutil
 
-# Pfad, wo das trainierte Modell gespeichert werden soll
+# path where the trained model should be saved
 model_dir = './trained_model'
 
-# Laden des deutschen spaCy-Modells
+# load the german spaCy model
 nlp = spacy.load('de_core_news_sm')
 
-# Textklassifikator zum Pipeline hinzufügen, falls noch nicht vorhanden
+# add the text classifier to the pipeline if it doesn't exist
 if 'textcat_multilabel' not in nlp.pipe_names:
     textcat = nlp.add_pipe('textcat_multilabel')
 else:
     textcat = nlp.get_pipe('textcat_multilabel')
 
-# Labels festlegen
+# define the labels
 labels = {"Umwelt", "Bildung", "Gesundheit", "Wirtschaft"}
 
-# Überprüfen, ob ein trainiertes Modell vorhanden ist
+# proof if model already exists
 if os.path.exists(model_dir):
     nlp = spacy.load(model_dir)
 else:
-    # Labels zum Textklassifikator hinzufügen
     for label in labels:
         textcat.add_label(label)
 
-    # Pfad zur JSON-Datei mit Trainingsdaten
+    # path to the json file with the training data
     file_path = './modified_training_data.json'
 
-    # Trainingsdaten aus der JSON-Datei lesen
+    # read the training data
     with open(file_path, 'r', encoding='utf-8') as file:
         train_data = json.load(file)
 
-    # Training des spaCy-Modells
+    # train the model
     optimizer = nlp.begin_training()
     for i in range(10):
         random.shuffle(train_data)
@@ -49,16 +48,16 @@ else:
                 nlp.update([example], drop=0.2, losses=losses)
         print(f"Losses at iteration {i}: {losses}")
 
-    # Trainiertes Modell speichern
+    # save the trained model
     nlp.to_disk(model_dir)
 
-# Verzeichnis mit den zu klassifizierenden Dateien
+# directory with the extracted text files
 extracted_text_directory = '../1 data_preprocessing/output'
 output_folder = './labels'
 os.makedirs(output_folder, exist_ok=True)
 allParties = "Party,Label,Percentage\n"
 
-# Dateien im Verzeichnis klassifizieren
+# classify the text files
 for filename in os.listdir(extracted_text_directory):
     print("Start processing files")
     counterUmwelt = 0
@@ -84,7 +83,6 @@ for filename in os.listdir(extracted_text_directory):
                 if max_label == "Wirtschaft":
                     counterWirtschaft += 1
 
-            # CSV-Datei für jede Textdatei erstellen
             csv_file_path = os.path.join(output_folder, filename.replace('.txt', '.csv'))
             with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
                 text = "Label,Percentage\n"
@@ -94,11 +92,11 @@ for filename in os.listdir(extracted_text_directory):
                 text = text[:-1]
                 csvfile.write(text)
 
-# Ergebnisse in eine CSV-Datei schreiben
+# write the results to a csv file
 csv_file_path = os.path.join(output_folder, 'classification_results.csv')
 with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
     allParties = allParties[:-1]
     csvfile.write(allParties)
 
-# Kopieren des Ordners in das React-Frontend
+# copy the folder to the frontend
 shutil.copytree('./labels', '../../frontend/src/pages/charts/data/labels', dirs_exist_ok=True)
