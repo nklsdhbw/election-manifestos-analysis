@@ -1,22 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import * as dfd from "danfojs";
-import top_words from "../charts/data/SPD_top_worte.csv";
-import apple from "../charts/data/apple.csv";
-import email from "../charts/data/email.csv";
-import similarities from "../charts/data/similarities/AFD - similarities.csv";
-import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv";
-import topics from "../charts/data/labels/FDP.csv";
+import top_words from "../charts/data/top_words/DIE_LINKE_top_worte.csv";
 
-const Hfhfh = () => {
-  const [emailDataFrame, setEmailDataFrame] = useState(null);
-  const [appleDataFrame, setAppleDataFrame] = useState(null);
+
+import similarities from "../charts/data/similarities/Die Linke - similarities.csv";
+import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv";
+import topics from "../charts/data/labels/DIE_LINKE.csv";
+
+const Linke = () => {
+
+
   const [topWordsDataFrame, setTopWordsDataFrame] = useState(null);
   const [similarityDataFrame, setSimilarityDataFrame] = useState(null);
   const [sentimentDataFrame, setSentimentDataFrame] = useState(null);
   const [topicsDataFrame, setTopicsDataFrame] = useState(null);
-  const emailChartRef = useRef(null);
-  const appleChartRef = useRef(null);
+  
+
   const topWordsChartRef = useRef(null);
   const polarChartRef = useRef(null);
   const bubbleChartRef = useRef(null);
@@ -26,7 +26,7 @@ const Hfhfh = () => {
     async function fetchCSVData(file) {
       try {
         const csv = await fetch(file).then((row) => row.text());
-        console.log(csv);
+   
         // Replace any occurrences of '\r' with an empty string to remove them.
         const cleanedCSV = csv.replace(/\r/g, "");
 
@@ -57,25 +57,8 @@ const Hfhfh = () => {
         console.error("Error processing email CSV data", error);
       });
 
-    fetchCSVData(email)
-      .then((dataFrame) => {
-        if (dataFrame) {
-          setEmailDataFrame(dataFrame);
-        }
-      })
-      .catch((error) => {
-        console.error("Error processing email CSV data", error);
-      });
-
-    fetchCSVData(apple)
-      .then((dataFrame) => {
-        if (dataFrame) {
-          setAppleDataFrame(dataFrame);
-        }
-      })
-      .catch((error) => {
-        console.error("Error processing apple CSV data", error);
-      });
+    
+    
 
     fetchCSVData(similarities)
       .then((dataFrame) => {
@@ -91,7 +74,7 @@ const Hfhfh = () => {
       .then((dataFrame) => {
         if (dataFrame) {
           setSentimentDataFrame(dataFrame);
-          console.log(dataFrame);
+          
         }
       })
       .catch((error) => {
@@ -102,7 +85,7 @@ const Hfhfh = () => {
       .then((dataFrame) => {
         if (dataFrame) {
           setTopicsDataFrame(dataFrame);
-          console.log(dataFrame);
+         
         }
       })
       .catch((error) => {
@@ -113,12 +96,8 @@ const Hfhfh = () => {
       if (topWordsChartRef.current) {
         topWordsChartRef.current.destroy();
       }
-      if (emailChartRef.current) {
-        emailChartRef.current.destroy();
-      }
-      if (appleChartRef.current) {
-        appleChartRef.current.destroy();
-      }
+     
+      
       if (polarChartRef.current) {
         polarChartRef.current.destroy();
       }
@@ -131,85 +110,8 @@ const Hfhfh = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (emailDataFrame) {
-      const emailData = {
-        labels: emailDataFrame["Date"].values,
-        datasets: [
-          {
-            label: "Email Dataset",
-            data: emailDataFrame["Identifier"].values,
-            backgroundColor: "#E3000F",
-            borderColor: "black",
-            borderWidth: 1,
-          },
-        ],
-      };
-
-      const emailConfig = {
-        type: "bar",
-        data: emailData,
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: "top",
-            },
-            title: {
-              display: true,
-              text: "Email Chart",
-            },
-          },
-        },
-      };
-
-      if (emailChartRef.current) {
-        emailChartRef.current.destroy();
-      }
-
-      emailChartRef.current = new Chart("emailChart", emailConfig);
-    }
-  }, [emailDataFrame]);
-
-  useEffect(() => {
-    if (appleDataFrame) {
-      const appleData = {
-        labels: appleDataFrame["Date"].values,
-        datasets: [
-          {
-            label: "Apple Dataset",
-            data: appleDataFrame["Close"].values,
-            backgroundColor: "#E3000F",
-            borderColor: "black",
-            borderWidth: 1,
-          },
-        ],
-      };
-
-      const appleConfig = {
-        type: "line",
-        data: appleData,
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: "top",
-            },
-            title: {
-              display: true,
-              text: "Apple Stock Price Chart",
-            },
-          },
-        },
-      };
-
-      if (appleChartRef.current) {
-        appleChartRef.current.destroy();
-      }
-
-      appleChartRef.current = new Chart("appleChart", appleConfig);
-    }
-  }, [appleDataFrame]);
+  
+  
 
   useEffect(() => {
     if (topWordsDataFrame) {
@@ -377,32 +279,26 @@ const Hfhfh = () => {
 
   return (
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <img src="../charts/data/wordclouds/DIE_LINKE_top_worte.svg" alt="WordcloudLinke" />
       <div className="items-center flex-row flex">
         <div style={{ width: "50%", height: "50%" }}>
           <canvas id="topWordsChart"></canvas>
         </div>
         <div style={{ width: "50%", height: "50%" }}>
-          <canvas id="emailChart"></canvas>
-        </div>
-      </div>
-      <div className="items-center flex-row flex">
-        <div style={{ width: "50%", height: "50%" }}>
-          <canvas id="appleChart"></canvas>
-        </div>
-        <div style={{ width: "50%", height: "50%" }}>
-          <canvas id="polarChart"></canvas>
-        </div>
-      </div>
-      <div className="items-center flex-row flex">
-        <div style={{ width: "50%", height: "50%" }}>
-          <canvas id="bubbleChart"></canvas>
-        </div>
-        <div style={{ width: "50%", height: "50%" }}>
           <canvas id="topicsChart"></canvas>
         </div>
       </div>
-    </div>
+      <div className="items-center flex-row flex pt-24">
+        <div style={{ width: "50%", height: "50%" }}>
+          <canvas id="polarChart"></canvas>
+        </div>
+      
+        <div style={{ width: "50%", height: "50%" }}>
+          <canvas id="bubbleChart"></canvas>
+        </div>
+        </div>
+      </div>
   );
 };
 
-export default Hfhfh;
+export default Linke;
