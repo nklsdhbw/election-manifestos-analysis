@@ -9,7 +9,7 @@ import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv"
 import topics from "../charts/data/labels/AFD.csv";
 
 const Afd = () => {
-
+  const COLORSBUBBLE = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "B90 / Die Grünen":"#1AA037", "CDU CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
   const COLORS = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "Die Grünen":"#1AA037", "CDU & CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
   const [topWordsDataFrame, setTopWordsDataFrame] = useState(null);
   const [similarityDataFrame, setSimilarityDataFrame] = useState(null);
@@ -144,6 +144,7 @@ const Afd = () => {
           plugins: {
             legend: {
               position: "right",
+              display: false
             },
             title: {
               display: true,
@@ -177,8 +178,20 @@ const Afd = () => {
       const polarConfig = {
         type: "polarArea",
         data: polarData,
-        options: {devicePixelRatio:6,
+        options: {
+          devicePixelRatio:6,
           responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+              display: false
+            },
+            title: {
+              display: true,
+              text: "Ähnlichkeit der Parteien zu AFD",
+            },
+            
+          }
         },
       };
 
@@ -211,6 +224,8 @@ const Afd = () => {
           {
             label: "",
             data: dataArray,
+            backgroundColor: sentimentDataFrame["Partei"].values.map((key) => COLORSBUBBLE[key]),
+            hoverBackgroundColor: sentimentDataFrame["Partei"].values.map((key) => COLORSBUBBLE[key])
           },
         ],
       };
@@ -219,7 +234,18 @@ const Afd = () => {
         type: "bubble",
         data: bubbleData,
         options: {devicePixelRatio:6,
+          scales: {y: {title: {display: true, text: "Negative Sentiment"}}, x: {title: {display: true, text: "Positive Sentiment"}}},
           responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+              display: false
+            },
+            title: {
+              display: true,
+              text: "Verhältnis von positiven und negativen Sätzen je Partei",
+            },  
+          }
         },
       };
 
@@ -254,10 +280,11 @@ const Afd = () => {
           plugins: {
             legend: {
               position: "top",
+              display: false
             },
             title: {
               display: true,
-              text: "Topics Chart",
+              text: "Relative Verteilung der Topics",
             },
           },
         },

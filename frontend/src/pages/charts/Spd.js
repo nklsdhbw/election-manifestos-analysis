@@ -9,7 +9,7 @@ import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv"
 import topics from "../charts/data/labels/SPD.csv";
 
 const Spd = () => {
-
+  const COLORSBUBBLE = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "B90 / Die Grünen":"#1AA037", "CDU CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
   const COLORS = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "Die Grünen":"#1AA037", "CDU & CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
   const [topWordsDataFrame, setTopWordsDataFrame] = useState(null);
   const [similarityDataFrame, setSimilarityDataFrame] = useState(null);
@@ -144,6 +144,7 @@ const Spd = () => {
           plugins: {
             legend: {
               position: "right",
+              display: false
             },
             title: {
               display: true,
@@ -179,8 +180,20 @@ const Spd = () => {
       const polarConfig = {
         type: "polarArea",
         data: polarData,
-        options: {devicePixelRatio:6,
+        options: {
+          devicePixelRatio:6,
           responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+              display: false
+            },
+            title: {
+              display: true,
+              text: "Ähnlichkeit der Parteien zu SPD",
+            },
+            
+          }
         },
       };
 
@@ -213,6 +226,8 @@ const Spd = () => {
           {
             label: "",
             data: dataArray,
+            backgroundColor: sentimentDataFrame["Partei"].values.map((key) => COLORSBUBBLE[key]),
+            hoverBackgroundColor: sentimentDataFrame["Partei"].values.map((key) => COLORSBUBBLE[key])
           },
         ],
       };
@@ -221,7 +236,19 @@ const Spd = () => {
         type: "bubble",
         data: bubbleData,
         options: {devicePixelRatio:6,
+          scales: {y: {title: {display: true, text: "Negative Sentiment"}}, x: {title: {display: true, text: "Positive Sentiment"}}},
           responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+              display: false
+            },
+            title: {
+              display: true,
+              text: "Verhältnis von positiven und negativen Sätzen je Partei",
+            },
+            
+          }
         },
       };
 
@@ -256,10 +283,11 @@ const Spd = () => {
           plugins: {
             legend: {
               position: "top",
+              display: false
             },
             title: {
               display: true,
-              text: "Topics Chart",
+              text: "Relative Verteilung der Topics",
             },
           },
         },
