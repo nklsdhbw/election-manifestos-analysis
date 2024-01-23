@@ -4,7 +4,7 @@ import * as dfd from "danfojs";
 import top_words from "../charts/data/top_words/DIE_GRUENEN_top_worte.csv";
 
 
-import similarities from "../charts/data/similarities/B90  Die Grünen - similarities.csv";
+import similarities from "../charts/data/similarities/Die Grünen - similarities.csv";
 import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv";
 import topics from "../charts/data/labels/DIE_GRUENEN.csv";
 
