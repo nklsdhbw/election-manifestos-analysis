@@ -10,7 +10,7 @@ import topics from "../charts/data/labels/AFD.csv";
 
 const Afd = () => {
 
-
+  const COLORS = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "Die Grünen":"#1AA037", "CDU & CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
   const [topWordsDataFrame, setTopWordsDataFrame] = useState(null);
   const [similarityDataFrame, setSimilarityDataFrame] = useState(null);
   const [sentimentDataFrame, setSentimentDataFrame] = useState(null);
@@ -169,13 +169,7 @@ const Afd = () => {
           {
             label: "",
             data: similarityDataFrame["similarity"].values, //[10, 20, 30, 40, 50],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(75, 192, 192)",
-              "rgb(255, 205, 86)",
-              "rgb(201, 203, 207)",
-              "rgb(54, 162, 235)",
-            ],
+            backgroundColor: similarityDataFrame["party"].values.map((key) => COLORS[key]),
           },
         ],
       };

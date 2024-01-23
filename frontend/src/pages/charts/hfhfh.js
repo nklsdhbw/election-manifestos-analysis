@@ -9,6 +9,7 @@ import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv"
 import topics from "../charts/data/labels/FDP.csv";
 
 const Hfhfh = () => {
+  const COLORS = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "Die Grünen":"#1AA037", "CDU & CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
   const [emailDataFrame, setEmailDataFrame] = useState(null);
   const [appleDataFrame, setAppleDataFrame] = useState(null);
   const [topWordsDataFrame, setTopWordsDataFrame] = useState(null);
@@ -267,13 +268,7 @@ const Hfhfh = () => {
           {
             label: "",
             data: similarityDataFrame["similarity"].values, //[10, 20, 30, 40, 50],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(75, 192, 192)",
-              "rgb(255, 205, 86)",
-              "rgb(201, 203, 207)",
-              "rgb(54, 162, 235)",
-            ],
+            backgroundColor: similarityDataFrame["party"].values.map((key) => COLORS[key]),
           },
         ],
       };
