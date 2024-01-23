@@ -3,7 +3,7 @@ import Chart from "chart.js/auto";
 import * as dfd from "danfojs";
 import top_words from "../charts/data/top_words/SPD_top_worte.csv";
 
-
+import wordlcloud from "../charts/data/wordclouds/SPD_wordcloud.svg"
 import similarities from "../charts/data/similarities/SPD - similarities.csv";
 import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv";
 import topics from "../charts/data/labels/SPD.csv";
@@ -279,6 +279,11 @@ const Spd = () => {
 
   return (
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <div className="items.center flex justify-center pb-20">
+      <div style={{ width: "50%", height: "50%" }}>
+          <img src={wordlcloud}></img>
+        </div>
+      </div>
       <div className="items-center flex-row flex">
         <div style={{ width: "50%", height: "50%" }}>
           <canvas id="topWordsChart"></canvas>
