@@ -1,14 +1,6 @@
-version: "3"
+version: "1"
 
 services:
-  python:
-    build:
-      context: ../python
-      dockerfile: Dockerfile
-    image: python
-    container_name: python
-    networks:
-      - my_network
   reactapp:
     build:
       context: ../frontend
