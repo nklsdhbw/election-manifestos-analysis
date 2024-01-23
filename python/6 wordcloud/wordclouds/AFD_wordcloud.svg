@@ -1,35 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="5760" height="3240">
-<style>@font-face{font-family:'Droid Sans Mono';font-weight:normal;font-style:normal;src:url("data:application/font-woff;charset=utf-8;base64,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")format("woff");}</style>
+<style>@font-face{font-family:'Droid Sans Mono';font-weight:normal;font-style:normal;src:url("data:application/font-woff;charset=utf-8;base64,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")format("woff");}</style>
 <style>text{font-family:'Droid Sans Mono';font-weight:normal;font-style:normal;}</style>
 <rect width="100%" height="100%" style="fill:white"></rect>
-<text transform="translate(3183,3198)" font-size="1365" style="fill:rgb(165, 219, 54)">afd</text>
-<text transform="translate(9,1021)" font-size="870" style="fill:rgb(71, 16, 99)">deutschland</text>
-<text transform="translate(1638,1806)" font-size="804" style="fill:rgb(147, 215, 65)">fordert</text>
-<text transform="translate(162,2390)" font-size="741" style="fill:rgb(162, 218, 55)">deutschen</text>
-<text transform="translate(1383,3101)" font-size="702" style="fill:rgb(223, 227, 24)">ab</text>
-<text transform="translate(543,1433)" font-size="696" style="fill:rgb(42, 118, 142)">eu</text>
-<text transform="translate(762,418)" font-size="567" style="fill:rgb(70, 7, 90)">müssen</text>
-<text transform="translate(3993,496)" font-size="525" style="fill:rgb(76, 194, 108)">sowie</text>
-<text transform="translate(159,3092)" font-size="480" style="fill:rgb(34, 139, 141)">mehr</text>
-<text transform="translate(6,1742)" font-size="252" style="fill:rgb(33, 145, 140)">europäischen</text>
-<text transform="translate(1968,2627)" font-size="243" style="fill:rgb(200, 224, 32)">deutsche</text>
-<text transform="translate(588,2677)" font-size="240" style="fill:rgb(213, 226, 26)">familien</text>
-<text transform="translate(2310,2985)" font-size="237" style="fill:rgb(72, 36, 117)">bürger</text>
-<text transform="translate(3990,1237)" font-size="234" style="fill:rgb(53, 95, 141)">insbesondere</text>
-<text transform="translate(4815,2092)" font-size="234" style="fill:rgb(101, 203, 94)">sollen</text>
-<text transform="translate(3204,205)" font-size="234" style="fill:rgb(30, 157, 137)">daher</text>
-<text transform="translate(2304,1233)" font-size="231" style="fill:rgb(69, 56, 130)">darf</text>
-<text transform="translate(753,1958)" font-size="228" style="fill:rgb(86, 198, 103)">lehnen</text>
-<text transform="translate(5674,3022) rotate(-90)" font-size="222" style="fill:rgb(38, 173, 129)">unserer</text>
-<text transform="translate(3978,184)" font-size="222" style="fill:rgb(117, 208, 84)">erhalten</text>
-<text transform="translate(3210,1977)" font-size="213" style="fill:rgb(57, 86, 140)">deutschlands</text>
-<text transform="translate(4836,1621)" font-size="213" style="fill:rgb(34, 140, 141)">fordern</text>
-<text transform="translate(2250,2798)" font-size="210" style="fill:rgb(68, 59, 132)">maßnahmen</text>
-<text transform="translate(1776,1975)" font-size="210" style="fill:rgb(72, 26, 108)">kinder</text>
-<text transform="translate(166,2951) rotate(-90)" font-size="207" style="fill:rgb(69, 5, 89)">menschen</text>
-<text transform="translate(4953,1398)" font-size="201" style="fill:rgb(71, 19, 101)">jahren</text>
-<text transform="translate(4869,2301)" font-size="198" style="fill:rgb(34, 140, 141)">euro</text>
-<text transform="translate(144,306)" font-size="198" style="fill:rgb(38, 129, 142)">lehnt</text>
-<text transform="translate(3048,1179)" font-size="198" style="fill:rgb(170, 220, 50)">staaten</text>
-<text transform="translate(2235,3232)" font-size="195" style="fill:rgb(72, 31, 112)">deshalb</text>
+<text transform="translate(48,2585)" font-size="900" style="fill:rgb(80, 196, 106)">afd</text>
+<text transform="translate(1200,3145)" font-size="645" style="fill:rgb(51, 98, 141)">deutschland</text>
+<text transform="translate(957,1159)" font-size="594" style="fill:rgb(46, 109, 142)">fordert</text>
+<text transform="translate(2370,1834)" font-size="546" style="fill:rgb(72, 38, 119)">deutschen</text>
+<text transform="translate(126,1679)" font-size="516" style="fill:rgb(30, 156, 137)">ab</text>
+<text transform="translate(4158,1000)" font-size="513" style="fill:rgb(181, 222, 43)">eu</text>
+<text transform="translate(3642,2230)" font-size="498" style="fill:rgb(47, 107, 142)">müssen</text>
+<text transform="translate(1428,551)" font-size="462" style="fill:rgb(31, 153, 138)">sowie</text>
+<text transform="translate(2388,2384) rotate(-90)" font-size="423" style="fill:rgb(122, 209, 81)">mehr</text>
+<text transform="translate(2463,2548)" font-size="408" style="fill:rgb(32, 164, 134)">europäischen</text>
+<text transform="translate(2766,329)" font-size="393" style="fill:rgb(70, 7, 90)">deutsche</text>
+<text transform="translate(3603,1358)" font-size="387" style="fill:rgb(30, 156, 137)">familien</text>
+<text transform="translate(54,586)" font-size="381" style="fill:rgb(53, 183, 121)">bürger</text>
+<text transform="translate(2829,618)" font-size="375" style="fill:rgb(56, 89, 140)">insbesondere</text>
+<text transform="translate(801,1659)" font-size="375" style="fill:rgb(59, 81, 139)">sollen</text>
+<text transform="translate(51,3186)" font-size="375" style="fill:rgb(122, 209, 81)">daher</text>
+<text transform="translate(2547,2178)" font-size="369" style="fill:rgb(68, 59, 132)">darf</text>
+<text transform="translate(879,279)" font-size="363" style="fill:rgb(67, 61, 132)">lehnen</text>
+<text transform="translate(1752,1380)" font-size="351" style="fill:rgb(226, 228, 24)">unserer</text>
+<text transform="translate(5709,2528) rotate(-90)" font-size="351" style="fill:rgb(65, 68, 135)">erhalten</text>
+<text transform="translate(81,1887)" font-size="264" style="fill:rgb(63, 188, 115)">deutschlands</text>
+<text transform="translate(4638,319)" font-size="264" style="fill:rgb(234, 229, 26)">fordern</text>
+<text transform="translate(48,2783)" font-size="246" style="fill:rgb(33, 145, 140)">maßnahmen</text>
+<text transform="translate(9,1027)" font-size="246" style="fill:rgb(61, 77, 138)">kinder</text>
+<text transform="translate(531,1355)" font-size="243" style="fill:rgb(72, 26, 108)">menschen</text>
+<text transform="translate(2026,2757) rotate(-90)" font-size="234" style="fill:rgb(70, 10, 93)">jahren</text>
+<text transform="translate(2355,742)" font-size="228" style="fill:rgb(47, 108, 142)">euro</text>
+<text transform="translate(2658,2780)" font-size="228" style="fill:rgb(41, 121, 142)">lehnt</text>
+<text transform="translate(4137,2729)" font-size="228" style="fill:rgb(35, 136, 142)">staaten</text>
+<text transform="translate(4818,811)" font-size="222" style="fill:rgb(61, 78, 138)">deshalb</text>
 </svg>
