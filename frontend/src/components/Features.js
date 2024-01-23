@@ -3,19 +3,19 @@ import p2 from '../img/p2.png';
 
 const features = [
   {
-    name: 'Lorem ipsum',
+    name: 'Die Ähnlichkeitsanalyse',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      ' zeigt dir, wie ähnlich sich die Parteien in ihren Wahlprogrammen sind.',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'Lorem ipsum',
-    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+    name: 'Die Sentimentanalyse',
+    description: 'zeigt dir, wie positiv oder negativ die Parteien in ihrem Wahlprogramm sprechen.',
     icon: LockClosedIcon,
   },
   {
-    name: 'Lorem ipsum',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Die Top-Wörter-Analyse',
+    description: 'zeigt dir, welche Wörter die Parteien am häufigsten verwenden.',
     icon: ServerIcon,
   },
 ]
@@ -27,9 +27,9 @@ export default function Example() {
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-8 lg:pt-4">
             <div className="lg:max-w-lg">
-              <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Du willst wissen in welche richtung <span className='text-indigo-600'>deine Partei steuert ?</span></p>
+              <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Komplexe Analysen zu<span className='text-indigo-600'> Wahlprogrammen.</span></p>
               <p className="mt-6 text-lg leading-8 text-gray-600">
-              Lade jetzt dein Wahlprogramm hoch und wir sagen dir wie deine Partei steht und welcher Bias in den Daten enthalten ist, Mithilfe von KI.
+              Hier findest du ausführliche Analysen zu den Wahlprogrammen der 6 größten Parteien aus Deutschland.
               </p>
               <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                 {features.map((feature) => (
