@@ -33,7 +33,7 @@ Run the following command in your terminal to download the repo. You can also us
 
   
 
-wget https://github.com/nklsdhbw/election-manifestos-analysis/archive/refs/heads/main.zip
+	wget https://github.com/nklsdhbw/election-manifestos-analysis/archive/refs/heads/main.zip
 
 Now unzip the `main.zip` folder e.g. with the `unzip`package
 
