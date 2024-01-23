@@ -3,14 +3,14 @@ import Chart from "chart.js/auto";
 import * as dfd from "danfojs";
 import top_words from "../charts/data/top_words/FDP_top_worte.csv";
 
-
+import wordlcloud from "../charts/data/wordclouds/FDP_wordcloud.svg";
 import similarities from "../charts/data/similarities/FDP - similarities.csv";
 import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv";
 import topics from "../charts/data/labels/FDP.csv";
 
 const Fdp = () => {
-
-
+  const COLORSBUBBLE = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "B90 / Die Grünen":"#1AA037", "CDU CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
+  const COLORS = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "Die Grünen":"#1AA037", "CDU & CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
   const [topWordsDataFrame, setTopWordsDataFrame] = useState(null);
   const [similarityDataFrame, setSimilarityDataFrame] = useState(null);
   const [sentimentDataFrame, setSentimentDataFrame] = useState(null);
@@ -121,7 +121,7 @@ const Fdp = () => {
           {
             label: "Word Dataset",
             data: topWordsDataFrame["Anzahl"].values,
-            backgroundColor: "#E3000F",
+            backgroundColor: "#FFEF00",
             borderColor: "black",
             borderWidth: 1,
           },
@@ -131,7 +131,7 @@ const Fdp = () => {
       const topWordsConfig = {
         type: "bar",
         data: topWordsData,
-        options: {
+        options: {devicePixelRatio:6,
           indexAxis: "y",
           // Elements options apply to all of the options unless overridden in a dataset
           // In this case, we are setting the border of each horizontal bar to be 2px wide
@@ -144,6 +144,7 @@ const Fdp = () => {
           plugins: {
             legend: {
               position: "right",
+              display: false
             },
             title: {
               display: true,
@@ -169,13 +170,7 @@ const Fdp = () => {
           {
             label: "",
             data: similarityDataFrame["similarity"].values, //[10, 20, 30, 40, 50],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(75, 192, 192)",
-              "rgb(255, 205, 86)",
-              "rgb(201, 203, 207)",
-              "rgb(54, 162, 235)",
-            ],
+            backgroundColor: similarityDataFrame["party"].values.map((key) => COLORS[key]),
           },
         ],
       };
@@ -184,7 +179,19 @@ const Fdp = () => {
         type: "polarArea",
         data: polarData,
         options: {
+          devicePixelRatio:6,
           responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+              display: false
+            },
+            title: {
+              display: true,
+              text: "Ähnlichkeit der Parteien zu FDP",
+            },
+            
+          }
         },
       };
 
@@ -217,6 +224,8 @@ const Fdp = () => {
           {
             label: "",
             data: dataArray,
+            backgroundColor: sentimentDataFrame["Partei"].values.map((key) => COLORSBUBBLE[key]),
+            hoverBackgroundColor: sentimentDataFrame["Partei"].values.map((key) => COLORSBUBBLE[key])
           },
         ],
       };
@@ -224,8 +233,20 @@ const Fdp = () => {
       const bubbleConfig = {
         type: "bubble",
         data: bubbleData,
-        options: {
+        options: {devicePixelRatio:6,
+          scales: {y: {title: {display: true, text: "Negative Sentiment"}}, x: {title: {display: true, text: "Positive Sentiment"}}},
           responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+              display: false
+            },
+            title: {
+              display: true,
+              text: "Verhältnis von positiven und negativen Sätzen je Partei",
+            },
+            
+          }
         },
       };
 
@@ -245,7 +266,7 @@ const Fdp = () => {
           {
             label: "Topics Dataset",
             data: topicsDataFrame["Percentage"].values,
-            backgroundColor: "#E3000F",
+            backgroundColor: "#FFEF00",
             borderColor: "black",
             borderWidth: 1,
           },
@@ -255,15 +276,16 @@ const Fdp = () => {
       const topicsConfig = {
         type: "bar",
         data: topicsData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
           plugins: {
             legend: {
               position: "top",
+              display: false
             },
             title: {
               display: true,
-              text: "Topics Chart",
+              text: "Relative Verteilung der Topics",
             },
           },
         },
@@ -279,6 +301,11 @@ const Fdp = () => {
 
   return (
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <div className="items.center flex justify-center pb-20">
+      <div style={{ width: "50%", height: "50%" }}>
+          <img src={wordlcloud}></img>
+        </div>
+      </div>
       <div className="items-center flex-row flex">
         <div style={{ width: "50%", height: "50%" }}>
           <canvas id="topWordsChart"></canvas>

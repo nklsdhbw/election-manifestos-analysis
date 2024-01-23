@@ -492,5 +492,137 @@
         "Gesundheit": true
       }
     }
-  ]
+  ],
+  [
+    "Wir setzen uns für den Ausbau erneuerbarer Energien ein, um den Klimawandel zu bekämpfen.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unser Ziel ist es, die Wirtschaft durch Steuersenkungen und Investitionen in kleine und mittelständische Unternehmen anzukurbeln.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Die Investition in Bildung, insbesondere in die digitale Infrastruktur unserer Schulen, ist ein Schlüsselaspekt unseres Programms.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir verpflichten uns, die Finanzierung für Krankenhäuser zu erhöhen und den Zugang zur medizinischen Versorgung für alle zu verbessern.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
+  ],
+  [
+    "Unser Engagement gilt dem Schutz der biologischen Vielfalt und der Förderung nachhaltiger Landwirtschaft.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir planen die Schaffung neuer Arbeitsplätze durch Förderung von Technologie-Startups und Innovationszentren.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Die Erhöhung der Lehrergehälter und die Verbesserung der Ausstattung an Schulen sind zentrale Punkte unseres Bildungsprogramms.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Ein Schwerpunkt unseres Programms ist die Förderung der psychischen Gesundheit und die Bereitstellung umfangreicher Unterstützungsangebote.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
+  ],
+  [
+    "Wir streben eine Reduzierung der CO2-Emissionen durch verstärkte Förderung des öffentlichen Nahverkehrs an.",
+    {
+      "cats": {
+        "Umwelt": true,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Unsere Initiative zur Förderung lokaler Märkte und regionaler Produkte wird die heimische Wirtschaft stärken.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": true,
+        "Bildung": false,
+        "Gesundheit": false
+      }
+    }
+  ],
+  [
+    "Wir setzen uns für den Ausbau der beruflichen Bildung ein, um Jugendlichen bessere Karrierechancen zu ermöglichen.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": true,
+        "Gesundheit": false
+      }
+    }
+  ], 
+  [
+    "Die Förderung von Präventionsprogrammen und die Stärkung der hausärztlichen Versorgung stehen im Zentrum unserer Gesundheitspolitik.",
+    {
+      "cats": {
+        "Umwelt": false,
+        "Wirtschaft": false,
+        "Bildung": false,
+        "Gesundheit": true
+      }
+    }
+  ]                        
 ]

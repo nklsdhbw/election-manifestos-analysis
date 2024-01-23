@@ -9,6 +9,8 @@ import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv"
 import topics from "../charts/data/labels/FDP.csv";
 
 const Hfhfh = () => {
+  const COLORSBUBBLE = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "B90 / Die Grünen":"#1AA037", "CDU CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
+  const COLORS = {"SPD": "#E3000F", "AFD": "#0489DB", "FDP": "#FFEF00", "Die Grünen":"#1AA037", "CDU & CSU": "#000000", "Die Linke": "rgb(86,14,50)"}
   const [emailDataFrame, setEmailDataFrame] = useState(null);
   const [appleDataFrame, setAppleDataFrame] = useState(null);
   const [topWordsDataFrame, setTopWordsDataFrame] = useState(null);
@@ -149,7 +151,7 @@ const Hfhfh = () => {
       const emailConfig = {
         type: "bar",
         data: emailData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
           plugins: {
             legend: {
@@ -189,7 +191,7 @@ const Hfhfh = () => {
       const appleConfig = {
         type: "line",
         data: appleData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
           plugins: {
             legend: {
@@ -229,7 +231,7 @@ const Hfhfh = () => {
       const topWordsConfig = {
         type: "bar",
         data: topWordsData,
-        options: {
+        options: {devicePixelRatio:6,
           indexAxis: "y",
           // Elements options apply to all of the options unless overridden in a dataset
           // In this case, we are setting the border of each horizontal bar to be 2px wide
@@ -242,6 +244,7 @@ const Hfhfh = () => {
           plugins: {
             legend: {
               position: "right",
+              display: false
             },
             title: {
               display: true,
@@ -267,13 +270,7 @@ const Hfhfh = () => {
           {
             label: "",
             data: similarityDataFrame["similarity"].values, //[10, 20, 30, 40, 50],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(75, 192, 192)",
-              "rgb(255, 205, 86)",
-              "rgb(201, 203, 207)",
-              "rgb(54, 162, 235)",
-            ],
+            backgroundColor: similarityDataFrame["party"].values.map((key) => COLORS[key]),
           },
         ],
       };
@@ -281,7 +278,7 @@ const Hfhfh = () => {
       const polarConfig = {
         type: "polarArea",
         data: polarData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
         },
       };
@@ -315,6 +312,8 @@ const Hfhfh = () => {
           {
             label: "",
             data: dataArray,
+            backgroundColor: sentimentDataFrame["Partei"].values.map((key) => COLORSBUBBLE[key]),
+            hoverBackgroundColor: sentimentDataFrame["Partei"].values.map((key) => COLORSBUBBLE[key])
           },
         ],
       };
@@ -322,8 +321,20 @@ const Hfhfh = () => {
       const bubbleConfig = {
         type: "bubble",
         data: bubbleData,
-        options: {
+        options: {devicePixelRatio:6,
+          scales: {y: {title: {display: true, text: "Negative Sentiment"}}, x: {title: {display: true, text: "Positive Sentiment"}}},
           responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+              display: false
+            },
+            title: {
+              display: true,
+              text: "Verhältnis von positiven und negativen Sätzen je Partei",
+            },
+            
+          }
         },
       };
 
@@ -353,15 +364,16 @@ const Hfhfh = () => {
       const topicsConfig = {
         type: "bar",
         data: topicsData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
           plugins: {
             legend: {
               position: "top",
+              display: false
             },
             title: {
               display: true,
-              text: "Topics Chart",
+              text: "Relative Verteilung der Topics",
             },
           },
         },
