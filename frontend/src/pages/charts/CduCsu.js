@@ -234,7 +234,9 @@ const CduCsu = () => {
         type: "bubble",
         data: bubbleData,
         options: {devicePixelRatio:6,
-          scales: {y: {title: {display: true, text: "Negative Sentiment"}}, x: {title: {display: true, text: "Positive Sentiment"}}},
+          scales: {y: {title: {display: true, text: "Negative Sentiment"}, ticks: {callback: function(value) {
+            return value.toFixed(1) + '%'}}}, x: {title: {display: true, text: "Positive Sentiment"},ticks: {callback: function(value) {
+              return value.toFixed(1) + '%'}}}},
           responsive: true,
           plugins: {
             legend: {
@@ -244,8 +246,7 @@ const CduCsu = () => {
             title: {
               display: true,
               text: "Verhältnis von positiven und negativen Sätzen je Partei",
-            },
-            
+            },  
           }
         },
       };

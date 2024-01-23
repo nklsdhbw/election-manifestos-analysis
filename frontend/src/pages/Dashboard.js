@@ -7,21 +7,21 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Chart from 'chart.js/auto';
-import ChartAfd from "./charts/Afd.js";
-import ChartSpd from "./charts/Spd.js";
-import ChartFdp from "./charts/Fdp.js";
+import ChartAFD from "./charts/Afd.js";
+import ChartSPD from "./charts/Spd.js";
+import ChartFDP from "./charts/Fdp.js";
 import Hfhfh from "./charts/hfhfh.js";
-import ChartCduCsu from "./charts/CduCsu.js";
-import ChartGrune from "./charts/Gruene.js";
-import ChartLinke from "./charts/Linke.js";
+import ChartCdu1Csu from "./charts/CduCsu.js";
+import ChartDie_Grünen from "./charts/Gruene.js";
+import ChartDie_Linke from "./charts/Linke.js";
 
 const chartComponents = {
-  ChartAfd: () => import("./charts/Afd.js"),
-  ChartSpd: () => import("./charts/Spd.js"),
-  ChartFdp: () => import("./charts/Fdp.js"),
-  ChartCduCsu: () => import("./charts/CduCsu.js"),
-  ChartGrune: () => import("./charts/Gruene.js"),
-  ChartLinke: () => import("./charts/Linke.js"),
+  ChartAFD: () => import("./charts/Afd.js"),
+  ChartSPD: () => import("./charts/Spd.js"),
+  ChartFDP: () => import("./charts/Fdp.js"),
+  ChartCdu1Csu: () => import("./charts/CduCsu.js"),
+  ChartDie_Grünen: () => import("./charts/Gruene.js"),
+  ChartDie_Linke: () => import("./charts/Linke.js"),
 };
 
 
@@ -37,21 +37,24 @@ export default function Dashboard() {
   const [currentChart, setCurrentChart] = useState(null);
   const [selectedParty, setSelectedParty] = useState('Options'); 
   const [ChartComponent, setChartComponent] = useState(null);
-  const [showChartAfd, setShowChartAfd] = useState(false);
-  const [showChartSpd, setShowChartSpd] = useState(false);
-  const [showChartFdp, setShowChartFdp] = useState(false);
+  const [showChartAFD, setShowChartAFD] = useState(false);
+  const [showChartSPD, setShowChartSPD] = useState(false);
+  const [showChartFDP, setShowChartFDP] = useState(false);
   const [showChartTest, setShowChartTest] = useState(false);
-  const [showChartCduCsu, setShowChartCduCsu] = useState(false);
+  const [showChartCdu1Csu, setShowChartCdu1Csu] = useState(false);
   
-  const [showChartGrune, setShowChartGrune] = useState(false);
-  const [showChartLinke, setShowChartLinke] = useState(false);
+  const [showChartDie_Grünen, setShowChartDie_Grünen] = useState(false);
+  const [showChartDie_Linke, setShowChartDie_Linke] = useState(false);
 
 
   const loadChartComponent = async (chartName) => {
     if (chartComponents[chartName]) {
       const importedComponent = await chartComponents[chartName]();
       setChartComponent(() => importedComponent.default);
-      setSelectedParty(chartName.replace('Chart', '')); // Aktualisieren des ausgewählten Parteinamens
+      let party  = chartName.replace('Chart', '');
+      party  = party.replace('_', ' ');
+      party = party.replace('1', '&');
+      setSelectedParty(party); // Aktualisieren des ausgewählten Parteinamens
     }
   };
 
@@ -82,18 +85,24 @@ export default function Dashboard() {
               <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
                 <Menu.Items className="absolute right-0 z-10 mt-12 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="py-1">
-                    {Object.keys(chartComponents).map((chart) => (
-                      <Menu.Item key={chart}>
-                        {({ active }) => (
-                          <button
-                            onClick={() => loadChartComponent(chart)}
-                            className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm')}
-                          >
-                            {chart.replace('Chart', '')}
-                          </button>
-                        )}
-                      </Menu.Item>
-                    ))}
+                  {Object.keys(chartComponents).map((chart) => {
+  let modifiedChartName = chart.replace("Chart", "");
+  modifiedChartName = modifiedChartName.replace("_", " ");
+  modifiedChartName = modifiedChartName.replace("1", "&")
+  return (
+    <Menu.Item key={chart}>
+      {({ active }) => (
+        <button
+          onClick={() => loadChartComponent(chart)}
+          className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm')}
+        >
+          {modifiedChartName}
+        </button>
+      )}
+    </Menu.Item>
+  );
+})}
+
                   </div>
                 </Menu.Items>
               </Transition>
