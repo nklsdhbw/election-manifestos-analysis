@@ -131,7 +131,7 @@ const Spd = () => {
       const topWordsConfig = {
         type: "bar",
         data: topWordsData,
-        options: {
+        options: {devicePixelRatio:6,
           indexAxis: "y",
           // Elements options apply to all of the options unless overridden in a dataset
           // In this case, we are setting the border of each horizontal bar to be 2px wide
@@ -179,7 +179,7 @@ const Spd = () => {
       const polarConfig = {
         type: "polarArea",
         data: polarData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
         },
       };
@@ -220,7 +220,7 @@ const Spd = () => {
       const bubbleConfig = {
         type: "bubble",
         data: bubbleData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
         },
       };
@@ -251,7 +251,7 @@ const Spd = () => {
       const topicsConfig = {
         type: "bar",
         data: topicsData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
           plugins: {
             legend: {

@@ -150,7 +150,7 @@ const Hfhfh = () => {
       const emailConfig = {
         type: "bar",
         data: emailData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
           plugins: {
             legend: {
@@ -190,7 +190,7 @@ const Hfhfh = () => {
       const appleConfig = {
         type: "line",
         data: appleData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
           plugins: {
             legend: {
@@ -230,7 +230,7 @@ const Hfhfh = () => {
       const topWordsConfig = {
         type: "bar",
         data: topWordsData,
-        options: {
+        options: {devicePixelRatio:6,
           indexAxis: "y",
           // Elements options apply to all of the options unless overridden in a dataset
           // In this case, we are setting the border of each horizontal bar to be 2px wide
@@ -276,7 +276,7 @@ const Hfhfh = () => {
       const polarConfig = {
         type: "polarArea",
         data: polarData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
         },
       };
@@ -317,7 +317,7 @@ const Hfhfh = () => {
       const bubbleConfig = {
         type: "bubble",
         data: bubbleData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
         },
       };
@@ -348,7 +348,7 @@ const Hfhfh = () => {
       const topicsConfig = {
         type: "bar",
         data: topicsData,
-        options: {
+        options: {devicePixelRatio:6,
           responsive: true,
           plugins: {
             legend: {
