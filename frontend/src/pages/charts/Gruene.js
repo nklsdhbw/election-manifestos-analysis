@@ -7,6 +7,7 @@ import top_words from "../charts/data/top_words/DIE_GRUENEN_top_worte.csv";
 import similarities from "../charts/data/similarities/Die Grünen - similarities.csv";
 import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv";
 import topics from "../charts/data/labels/DIE_GRUENEN.csv";
+import wordlcloud from "../charts/data/wordclouds/DIE_GRUENEN_wordcloud.svg";
 
 const Gruene = () => {
 
@@ -121,7 +122,7 @@ const Gruene = () => {
           {
             label: "Word Dataset",
             data: topWordsDataFrame["Anzahl"].values,
-            backgroundColor: "#E3000F",
+            backgroundColor: "#1AA037",
             borderColor: "black",
             borderWidth: 1,
           },
@@ -245,7 +246,7 @@ const Gruene = () => {
           {
             label: "Topics Dataset",
             data: topicsDataFrame["Percentage"].values,
-            backgroundColor: "#E3000F",
+            backgroundColor: "#1AA037",
             borderColor: "black",
             borderWidth: 1,
           },
@@ -279,6 +280,11 @@ const Gruene = () => {
 
   return (
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <div className="items.center flex justify-center pb-20">
+      <div style={{ width: "50%", height: "50%" }}>
+          <img src={wordlcloud}></img>
+        </div>
+      </div>
       <div className="items-center flex-row flex">
         <div style={{ width: "50%", height: "50%" }}>
           <canvas id="topWordsChart"></canvas>

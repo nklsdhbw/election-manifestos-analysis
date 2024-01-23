@@ -7,7 +7,7 @@ import top_words from "../charts/data/top_words/DIE_LINKE_top_worte.csv";
 import similarities from "../charts/data/similarities/Die Linke - similarities.csv";
 import sentiments from "../charts/data/sentiments/sentiment_characteristics.csv";
 import topics from "../charts/data/labels/DIE_LINKE.csv";
-
+import wordlcloud from "../charts/data/wordclouds/DIE_LINKE_wordcloud.svg";
 const Linke = () => {
 
 
@@ -278,9 +278,16 @@ const Linke = () => {
   }, [topicsDataFrame]);
 
   return (
+
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-    <img src="../charts/data/wordclouds/DIE_LINKE_top_worte.svg" alt="WordcloudLinke" />
+      
+      <div className="items.center flex justify-center pb-20">
+      <div style={{ width: "50%", height: "50%" }}>
+          <img src={wordlcloud}></img>
+        </div>
+      </div>
       <div className="items-center flex-row flex">
+      
         <div style={{ width: "50%", height: "50%" }}>
           <canvas id="topWordsChart"></canvas>
         </div>
