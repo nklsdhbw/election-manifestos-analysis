@@ -2,7 +2,11 @@
 
   
 
+  
+
 As part of the Natural Language Processing module at the DHBW Mannheim, the election manifestos of the FDP, CDU-CSU, Die Linke, Die Grünen and the AFD were analysed and compared.
+
+  
 
   
 
@@ -10,7 +14,11 @@ The following points were analysed
 
   
 
+  
+
 - ⚖️ Similarity of the manifestos
+
+  
 
   
 
@@ -18,7 +26,11 @@ The following points were analysed
 
   
 
+  
+
 - 📚 Topic modelling
+
+  
 
   
 
@@ -26,7 +38,11 @@ The following points were analysed
 
   
 
+  
+
 ## ✍🏼 Contributors
+
+  
 
   
 
@@ -34,29 +50,53 @@ The following points were analysed
 
   
 
+  
+
 [Niklas Scholz](https://github.com/nklsdhbw?tab=repositories) [Luca Mohr](https://github.com/Luca2732) [Christian Schmid](https://github.com/chris017) [Jan Mühlnikel](https://github.com/JanMuehlnikel)
 
-  - Data preprocessing (Niklas Scholz)
-  - Sentiment analysis (Jan Mühlnikel)
-  - Similarity analysis (Jan Mühlnikel)
-  - Summary (Luca Mohr)
-  - Top words (Luca Mohr)
-  - Wordclouds (Luca Mohr)
-  - Topic modelling (Luca Mohr)
-  - Development environment (Docker, Python venv) (Niklas Scholz)
-  - Frontend React Application (Christian Schmid)
-  - Charts (Christian Schmid, Niklas Scholz)
-  - Report (All)
+  
+
+- Data preprocessing (Niklas Scholz)
+
+- Sentiment analysis (Jan Mühlnikel)
+
+- Similarity analysis (Jan Mühlnikel)
+
+- Summary (Luca Mohr)
+
+- Top words (Luca Mohr)
+
+- Wordclouds (Luca Mohr)
+
+- Topic modelling (Luca Mohr)
+
+- Development environment (Docker, Python venv) (Niklas Scholz)
+
+- Frontend React Application (Christian Schmid)
+
+- Charts (Christian Schmid, Niklas Scholz)
+
+- Report (All)
+
+  
 
   
 
 ## 🚀 Getting started
 
+  
+
 ### 🐍 Python
+
+  
 
 Download and install [Python 3.11](https://www.python.org/downloads/)
 
+  
+
 ### 🐳 Docker
+
+  
 
 Download [Docker Desktop](https://www.docker.com/products/docker-desktop/) for Mac or Windows. [Docker Compose](https://docs.docker.com/compose/) will be automatically installed. On Linux, make sure you have the latest version of [Compose](https://docs.docker.com/compose/install/).
 
@@ -64,29 +104,31 @@ Download [Docker Desktop](https://www.docker.com/products/docker-desktop/) for M
 
   
 
+  
+
 ## ⬇️ Download repository & run the application
 
-Run the following command in your terminal to download the repo. You can also use your package-manager of choice.
-
   
 
-  
-
-wget https://github.com/nklsdhbw/election-manifestos-analysis/archive/refs/heads/main.zip
+Run the following command in your terminal to clone the repo.
 
   
-
-Now unzip the `main.zip` folder e.g. with the `unzip`package
-
+  
   
 
-unzip main.zip
+git clone https://github.com/nklsdhbw/election-manifestos-analysis.git
 
+  
+  
   
 
 ### 🌐 Frontend
 
+  
+
 Change to the directory containing the `docker-compose.yml` file
+
+  
 
   
 
@@ -98,7 +140,11 @@ cd election-manifestos-analysis/docker
 
   
 
+  
+
 Now start the containers using the following command
+
+  
 
   
 
@@ -108,19 +154,31 @@ docker compose up --build
 
   
 
+  
+
 The `frontend React-app` will then be running at [http://localhost:3000](http://localhost:3000/).
+
+  
 
   
 
 ### 🔬 Analysis
 
+  
+
 If you want to execute all the Python scripts by yourself you'll need a python version with all the required packages. Luckily we did this part for you
+
+  
 
   
 
 First navigate to the `python` directory with the following command
 
-cd python
+  
+
+	cd python
+
+  
 
   
 
@@ -128,21 +186,35 @@ Then create a new virtual environment called `nlp` by running the following comm
 
   
 
-python3.11 -m venv nlp
+  
+
+	python3.11 -m venv nlp
+
+  
 
   
 
 Afterwards activate your freshly created virtual environment
 
+  
+
 If you're using Windows then run
 
-source nlp\Scripts\activate
+  
+
+	source nlp\Scripts\activate
+
+  
 
 If you're using MacOs or Linux run
 
   
 
-source nlp/bin/activate
+  
+
+	source nlp/bin/activate
+
+  
 
   
 
@@ -150,17 +222,30 @@ Now install all the required packages from `requirements.txt` by running
 
   
 
-pip install -r requirements.txt
+  
 
-Then download the `de_core_news_sm` dataset from spacy via
+	pip install -r requirements.txt
 
-python -m spacy download de_core_news_sm
+  
+
+Then download the `de_core_news_sm` and `de_core_new_lg` dataset from spacy via
+
+  
+
+	python -m spacy download de_core_news_sm de_core_news_lg
+
+  
+  
 
 Lastly restart your IDE and you should be able to select `nlp` as your environment
 
   
 
+  
+
 ## 💻 Tech-stack
+
+  
 
   
 
