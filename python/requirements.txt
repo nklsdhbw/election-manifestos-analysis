@@ -1,4 +1,4 @@
-PyPDF2
+pypdf
 numpy
 pandas
 scikit-learn
