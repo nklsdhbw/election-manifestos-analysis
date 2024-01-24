@@ -232,7 +232,8 @@ Then download the `de_core_news_sm` and `de_core_new_lg` dataset from spacy via
 
   
 
-	python -m spacy download de_core_news_sm de_core_news_lg
+	python -m spacy download de_core_news_sm
+	python -m spacy download de_core_news_lg
 
   
   
