@@ -112,7 +112,7 @@ export default function Dashboard() {
         
         {selectedParty === "Options" ? (
           <div className="flex justify-center items-center h-64">
-            <div className="text-xl font-semibold">Please select a party</div>
+            <div className="text-xl font-semibold">Bitte wählen Sie eine Partei</div>
           </div>
         ) : (
           ChartComponent && <ChartComponent />

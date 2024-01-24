@@ -1,4 +1,4 @@
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+import { ChartBarIcon, AdjustmentsVerticalIcon, PresentationChartLineIcon } from '@heroicons/react/20/solid'
 import p2 from '../img/p2.png';
 
 const features = [
@@ -6,23 +6,23 @@ const features = [
     name: 'Die Ähnlichkeitsanalyse',
     description:
       ' zeigt dir, wie ähnlich sich die Parteien in ihren Wahlprogrammen sind.',
-    icon: CloudArrowUpIcon,
+    icon: ChartBarIcon,
   },
   {
     name: 'Die Sentimentanalyse',
     description: 'zeigt dir, wie positiv oder negativ die Parteien in ihrem Wahlprogramm sprechen.',
-    icon: LockClosedIcon,
+    icon: AdjustmentsVerticalIcon,
   },
   {
     name: 'Die Top-Wörter-Analyse',
     description: 'zeigt dir, welche Wörter die Parteien am häufigsten verwenden.',
-    icon: ServerIcon,
+    icon: PresentationChartLineIcon,
   },
 ]
 
 export default function Example() {
   return (
-    <div className="overflow-hidden bg-white pb-24 sm:pb-32">
+    <div className="overflow-hidden bg-white pb-24 sm:pb-32" id='Features'>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-8 lg:pt-4">
