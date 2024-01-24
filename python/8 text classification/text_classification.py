@@ -6,12 +6,13 @@ import os
 import csv
 import json
 import shutil
+from sklearn.model_selection import KFold
 
 # path where the trained model should be saved
 model_dir = './trained_model'
 
 # load the german spaCy model
-nlp = spacy.load('de_core_news_sm')
+nlp = spacy.load('de_core_news_lg')
 
 # add the text classifier to the pipeline if it doesn't exist
 if 'textcat_multilabel' not in nlp.pipe_names:
@@ -30,26 +31,42 @@ else:
         textcat.add_label(label)
 
     # path to the json file with the training data
-    file_path = './modified_training_data.json'
+    file_path = './training_data.json'
 
     # read the training data
     with open(file_path, 'r', encoding='utf-8') as file:
         train_data = json.load(file)
 
-    # train the model
+    kf = KFold(n_splits=5, shuffle=True, random_state=42)
+
+# cross validation
+for fold_number, (train_index, test_index) in enumerate(kf.split(train_data), start=1):
+    # Trainings- und Testdaten für diesen Fold extrahieren
+    train_fold = [train_data[i] for i in train_index]
+    test_fold = [train_data[i] for i in test_index]
+
+    # training data for this fold
+    train_examples = [Example.from_dict(nlp.make_doc(text), annotations) for text, annotations in train_fold]
+
+    # train the model for this fold
     optimizer = nlp.begin_training()
     for i in range(10):
-        random.shuffle(train_data)
+        random.shuffle(train_examples)
         losses = {}
-        for batch in minibatch(train_data, size=2):
-            for text, annotations in batch:
-                doc = nlp.make_doc(text)
-                example = Example.from_dict(doc, annotations)
+        for batch in minibatch(train_examples, size=2):
+            for example in batch:
                 nlp.update([example], drop=0.2, losses=losses)
-        print(f"Losses at iteration {i}: {losses}")
+        print(f"Verluste im Fold {fold_number}, Iteration {i}: {losses}")
 
-    # save the trained model
-    nlp.to_disk(model_dir)
+    # test data for this fold
+    test_examples = [Example.from_dict(nlp.make_doc(text), annotations) for text, annotations in test_fold]
+
+    # evaluation for this model and fold
+    scores = nlp.evaluate(test_examples)
+    print(f"Evaluierungsergebnisse für Fold {fold_number}: {scores}")
+
+# print the evaluation results
+print(f"Evaluation results: {scores}")
 
 # directory with the extracted text files
 extracted_text_directory = '../1 data_preprocessing/output'

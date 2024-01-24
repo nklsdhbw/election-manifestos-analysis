@@ -1,0 +1,398 @@
+[
+    [
+        "Die Sanierung von Flüssen und Seen und die Verbesserung der Wasserqualität sind Hauptziele unserer Umweltpolitik.",
+        {
+        "cats": {
+            "Umwelt": true,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": false
+        }
+        }
+    ],
+    [
+        "Die Förderung von Exporten in aufstrebende Märkte und die Diversifizierung unserer Handelspartner sind Schlüssel zur Stärkung unserer Wirtschaft.",
+        {
+        "cats": {
+            "Umwelt": false,
+            "Wirtschaft": true,
+            "Bildung": false,
+            "Gesundheit": false
+        }
+        }
+    ],
+    [
+        "Die Entwicklung von individualisierten Lehrplänen und die Unterstützung von Schülern mit besonderen Bedürfnissen sind Schwerpunkte unserer Bildungspolitik.",
+        {
+        "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": true,
+            "Gesundheit": false
+        }
+        }
+    ],
+    [
+        "Die Prävention von Jugendkriminalität und die Förderung von sozialer Integration sind Ziele unserer Gesundheitspolitik.",
+        {
+        "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": true
+        }
+        }
+    ],
+    [
+        "Die Reduzierung von Plastikmüll in unseren Ozeanen und die Förderung von Recyclinginitiativen sind Hauptziele unserer Umweltpolitik.",
+        {
+          "cats": {
+            "Umwelt": true,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Unterstützung von kleinen Familienbetrieben und die Schaffung von Arbeitsplätzen in ländlichen Gebieten sind Schlüssel zur Stärkung unserer Wirtschaft.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": true,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Integration von digitalen Lehrmethoden in den Schulunterricht und die Förderung von lebenslangem Lernen sind Schwerpunkte unserer Bildungspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": true,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Prävention von Suchterkrankungen und die Verbesserung der psychiatrischen Versorgung sind Ziele unserer Gesundheitspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": true
+          }
+        }
+      ],
+      [
+        "Der Schutz von bedrohten Tierarten und die Erhaltung ihrer Lebensräume sind Hauptziele unserer Umweltpolitik.",
+        {
+          "cats": {
+            "Umwelt": true,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Förderung von sauberer Energie und die Schaffung von grünen Arbeitsplätzen sind Schlüssel zur Stärkung unserer Wirtschaft.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": true,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Integration von digitalen Lehrmitteln und die Förderung von Bildungstechnologie sind Schwerpunkte unserer Bildungspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": true,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Prävention von mentalen Gesundheitsproblemen und die Stärkung der psychischen Gesundheitsversorgung sind Ziele unserer Gesundheitspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": true
+          }
+        }
+      ],
+      [
+        "Die Erhaltung von natürlichen Lebensräumen und die Unterstützung von ökologischen Nachhaltigkeitsprojekten sind Hauptziele unserer Umweltpolitik.",
+        {
+          "cats": {
+            "Umwelt": true,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Förderung von Start-ups und die Schaffung eines innovationsfreundlichen Umfelds sind Schlüssel zur Stärkung unserer Wirtschaft.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": true,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Integration von Online-Unterricht und die Entwicklung von digitalen Bildungsressourcen sind Schwerpunkte unserer Bildungspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": true,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Prävention von Infektionskrankheiten und die Stärkung der Gesundheitsversorgung in benachteiligten Gemeinden sind Ziele unserer Gesundheitspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": true
+          }
+        }
+      ],
+      [
+        "Die Reduzierung von Treibhausgasemissionen und die Förderung erneuerbarer Energien sind Hauptziele unserer Umweltpolitik.",
+        {
+          "cats": {
+            "Umwelt": true,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Unterstützung von kleinen und mittelständischen Unternehmen in ländlichen Gebieten ist ein wichtiger Bestandteil unserer Wirtschaftspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": true,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Integration von digitalen Lehrmethoden und die Förderung von E-Learning-Initiativen sind Schwerpunkte unserer Bildungspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": true,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Prävention von Infektionskrankheiten und die Verbesserung der Gesundheitsversorgung in entlegenen Regionen sind Ziele unserer Gesundheitspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": true
+          }
+        }
+      ],
+      [
+        "Die Erhaltung von Ökosystemen und die Unterstützung von Naturschutzgebieten sind zentrale Elemente unserer Umweltpolitik.",
+        {
+          "cats": {
+            "Umwelt": true,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Förderung von Forschung und Entwicklung und die Schaffung von Innovationszentren sind Schlüssel zur Stärkung unserer Wirtschaft.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": true,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Integration von Online-Lernplattformen und die Digitalisierung von Schulen sind Schwerpunkte unserer Bildungspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": true,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Prävention von chronischen Krankheiten und die Förderung eines gesunden Lebensstils sind von höchster Bedeutung in unserer Gesundheitspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": true
+          }
+        }
+      ],
+      [
+        "Der Schutz von bedrohten Tierarten und die Erhaltung ihrer Lebensräume stehen im Mittelpunkt unserer Umweltpolitik.",
+        {
+          "cats": {
+            "Umwelt": true,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Förderung von erneuerbaren Energien und die Schaffung von grünen Arbeitsplätzen sind Schlüssel zur Stärkung unserer Wirtschaft.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": true,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Integration von digitalen Bildungstools und die Förderung von Online-Lernplattformen sind Schwerpunkte unserer Bildungspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": true,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Prävention von psychischen Erkrankungen und die Verbesserung der psychischen Gesundheitsversorgung sind Ziele unserer Gesundheitspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": true
+          }
+        }
+      ],
+      [
+        "Die Erhaltung von Naturreservaten und die Förderung nachhaltiger Landwirtschaft sind Hauptziele unserer Umweltpolitik.",
+        {
+          "cats": {
+            "Umwelt": true,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Förderung von Start-ups und die Schaffung eines innovationsfreundlichen Umfelds sind Schlüssel zur Stärkung unserer Wirtschaft.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": true,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Integration von Online-Kursen und die Bereitstellung von digitalen Bildungsressourcen sind Schwerpunkte unserer Bildungspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": true,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Prävention von Herz-Kreislauf-Erkrankungen und die Förderung eines gesunden Lebensstils durch Sport sind von höchster Bedeutung in unserer Gesundheitspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": true
+          }
+        }
+      ],
+      [
+        "Die Reduzierung von Plastikmüll in unseren Ozeanen und die Förderung von Recyclinginitiativen sind Hauptziele unserer Umweltpolitik.",
+        {
+          "cats": {
+            "Umwelt": true,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Unterstützung von kleinen Familienbetrieben und die Schaffung von Arbeitsplätzen in ländlichen Gebieten sind Schlüssel zur Stärkung unserer Wirtschaft.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": true,
+            "Bildung": false,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Integration von digitalen Lehrmethoden und die Förderung von E-Learning-Initiativen sind Schwerpunkte unserer Bildungspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": true,
+            "Gesundheit": false
+          }
+        }
+      ],
+      [
+        "Die Prävention von Suchterkrankungen und die Verbesserung der psychiatrischen Versorgung sind Ziele unserer Gesundheitspolitik.",
+        {
+          "cats": {
+            "Umwelt": false,
+            "Wirtschaft": false,
+            "Bildung": false,
+            "Gesundheit": true
+          }
+        }
+      ] 
+]    
