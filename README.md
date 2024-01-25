@@ -153,7 +153,13 @@ Now start the containers using the following command
 docker compose up --build
 
   
+If you're having Node.JS already installed and dont want to run a docker container, you could also start the frontend via
 
+
+
+cd election-manifestos-analysis/frontend
+npm install
+npm start
   
 
 The `frontend React-app` will then be running at [http://localhost:3000](http://localhost:3000/).
