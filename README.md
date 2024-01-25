@@ -116,7 +116,7 @@ Run the following command in your terminal to clone the repo.
   
   
 
-git clone https://github.com/nklsdhbw/election-manifestos-analysis.git
+	git clone https://github.com/nklsdhbw/election-manifestos-analysis.git
 
   
   
@@ -134,7 +134,7 @@ Change to the directory containing the `docker-compose.yml` file
 
   
 
-cd election-manifestos-analysis/docker
+	cd election-manifestos-analysis/docker
 
   
 
@@ -156,10 +156,10 @@ docker compose up --build
 If you're having Node.JS already installed and dont want to run a docker container, you could also start the frontend via
 
 
-
-cd election-manifestos-analysis/frontend
-npm install
-npm start
+	
+	cd election-manifestos-analysis/frontend
+	npm install
+	npm start
   
 
 The `frontend React-app` will then be running at [http://localhost:3000](http://localhost:3000/).
